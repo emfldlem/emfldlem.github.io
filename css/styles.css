@@ -27,4 +27,13 @@ body {
   .gallery img {
     max-width: 100%; /* 모바일 화면에서는 이미지가 화면에 꽉 차도록 */
   }
+
+  img {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
+  }
 }
