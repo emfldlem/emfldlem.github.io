@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>포트폴리오</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #E62D21; /* 기본 배경색 주황색 */
+        }
+        .container {
+            max-width: 1200px; /* 최대 너비를 1200px로 제한 */
+            margin: 0 auto; /* 가로로 가운데 정렬 */
+            background-color: #E62D21; /* 컨테이너 내부 배경색 주황색 */
+            padding: 20px;
+        }
+        .gallery {
+            background-color: #E62D21; /* 갤러리 내부 배경색 주황색 */
+        }
+        .gallery img {
+            width: 100%; /* 이미지를 100% 너비로 설정 */
+            height: auto;
+            max-width: 1200px; /* 이미지의 최대 너비를 1200px로 설정 */
+            margin-bottom: 20px; /* 이미지 간 간격을 설정 */
+            
+        }
+
+        /* 반응형 설정 */
+        @media (max-width: 768px) {
+            .gallery img {
+                max-width: 100%; /* 모바일 화면에서는 이미지가 화면에 꽉 차도록 */
+            }
+        }
+
+        @media (min-width: 1201px) {
+            body {
+                background-color: #E62D21; /* 화면 너비가 1200px 이상일 때 주황색 배경 */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="gallery">
+            
+            <img src="https://oopy.lazyrockets.com/api/v2/notion/image?src=https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F8ab204f8-c8cf-4ce2-94f6-3cf4df5a37c6%2F05716104-a082-47fd-9cae-cbd94f6a4d80%2F%25EB%258C%2580%25EC%25A7%2580_1_%25EC%2582%25AC%25EB%25B3%25B82x-100.jpg&blockId=0f33b562-a186-4482-86bc-c3267fd36261" alt="포트폴리오 이미지 1">
+        </section>
+    </div>
+</body>
+</html>
