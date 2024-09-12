@@ -1,0 +1,30 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px; /* 최대 너비를 1200px로 제한 */
+  margin: 0 auto; /* 가로로 가운데 정렬 */
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap; /* 이미지가 넘칠 경우 다음 줄로 넘어가도록 설정 */
+  justify-content: center; /* 이미지들을 가로로 가운데 정렬 */
+  /*background-color: #E83918; !* 갤러리 내부 배경색 주황색 *!*/
+  box-shadow: 0 0 0 120px #E83918; /* padding 영역 외부에 색을 넣는 효과 */
+}
+
+.gallery img {
+  width: 100%; /* 이미지를 100% 너비로 설정 */
+  height: auto;
+  max-width: 1200px; /* 이미지의 최대 너비를 1200px로 설정 */
+}
+
+/* 반응형 설정 */
+@media (max-width: 768px) {
+  .gallery img {
+    max-width: 100%; /* 모바일 화면에서는 이미지가 화면에 꽉 차도록 */
+  }
+}
