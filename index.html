@@ -34,29 +34,47 @@
         }
 
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="container">
         <section class="gallery">
-            <img src="img/100/01-100.jpg" alt="포트폴리오 이미지 1">
-            <img src="img/100/02-100.jpg" alt="포트폴리오 이미지 1">
-            <img src="img/100/03-100.jpg" alt="포트폴리오 이미지 1">
-            <img src="img/100/04-100.jpg" alt="포트폴리오 이미지 1">
-            <img src="img/100/05-100.jpg" alt="포트폴리오 이미지 1">
-            <img src="img/100/06-100.jpg" alt="포트폴리오 이미지 1">
-            <img src="img/100/07-100.jpg" alt="포트폴리오 이미지 1">
-            <img src="img/100/08-100.jpg" alt="포트폴리오 이미지 1">
-            <img src="img/100/09-100.jpg" alt="포트폴리오 이미지 1">
-            <img src="img/100/10-100.jpg" alt="포트폴리오 이미지 1">
-            <img src="img/100/11-100.jpg" alt="포트폴리오 이미지 1">
-            <img src="img/100/12-100.jpg" alt="포트폴리오 이미지 1">
-            <img src="img/100/13-100.jpg" alt="포트폴리오 이미지 1">
-            <img src="img/100/14-100.jpg" alt="포트폴리오 이미지 1">
-            <img src="img/100/15-100.jpg" alt="포트폴리오 이미지 1">
-            <img src="img/100/16-100.jpg" alt="포트폴리오 이미지 1">
-            <img src="img/100/17-100.jpg" alt="포트폴리오 이미지 1">
-            <img src="img/100/18-100.jpg" alt="포트폴리오 이미지 1">
+            <img class="myImg" src="img/100/01-100.jpg" alt="포트폴리오 이미지 1">
+            <img class="myImg" src="img/100/02-100.jpg" alt="포트폴리오 이미지 1">
+            <img class="myImg" src="img/100/03-100.jpg" alt="포트폴리오 이미지 1">
+            <img class="myImg" src="img/100/04-100.jpg" alt="포트폴리오 이미지 1">
+            <img class="myImg" src="img/100/05-100.jpg" alt="포트폴리오 이미지 1">
+            <img class="myImg" src="img/100/06-100.jpg" alt="포트폴리오 이미지 1">
+            <img class="myImg" src="img/100/07-100.jpg" alt="포트폴리오 이미지 1">
+            <img class="myImg" src="img/100/08-100.jpg" alt="포트폴리오 이미지 1">
+            <img class="myImg" src="img/100/09-100.jpg" alt="포트폴리오 이미지 1">
+            <img class="myImg" src="img/100/10-100.jpg" alt="포트폴리오 이미지 1">
+            <img class="myImg" src="img/100/11-100.jpg" alt="포트폴리오 이미지 1">
+            <img class="myImg" src="img/100/12-100.jpg" alt="포트폴리오 이미지 1">
+            <img class="myImg" src="img/100/13-100.jpg" alt="포트폴리오 이미지 1">
+            <img class="myImg" src="img/100/14-100.jpg" alt="포트폴리오 이미지 1">
+            <img class="myImg" src="img/100/15-100.jpg" alt="포트폴리오 이미지 1">
+            <img class="myImg" src="img/100/16-100.jpg" alt="포트폴리오 이미지 1">
+            <img class="myImg" src="img/100/17-100.jpg" alt="포트폴리오 이미지 1">
+            <img class="myImg" src="img/100/18-100.jpg" alt="포트폴리오 이미지 1">
         </section>
     </div>
 </body>
+<script>
+    $('.myImg').on('error', function() {
+        let $this = $(this);
+        let maxAttempts = 3;
+        let attemptCount = $this.data('attempts') || 0;
+
+        if (attemptCount < maxAttempts) {
+            attemptCount++;
+            $this.data('attempts', attemptCount);
+            setTimeout(function() {
+                $this.attr('src', $this.attr('src') + '?' + new Date().getTime());
+            }, 1000);
+        } else {
+            console.log('Failed to load image after several attempts.');
+        }
+    });
+</script>
 </html>

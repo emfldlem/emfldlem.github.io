@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>포트폴리오</title>
+    <title>GAEUN KIM PORTFOLIO 2024</title>
     <style>
         body {
             margin: 0;
@@ -34,29 +34,49 @@
         }
 
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
+
 <body>
 <div class="container">
     <section class="gallery">
-        <img src="img/200/01@2x-100.jpg" alt="포트폴리오 이미지 1">
-        <img src="img/200/02@2x-100.jpg" alt="포트폴리오 이미지 1">
-        <img src="img/200/03@2x-100.jpg" alt="포트폴리오 이미지 1">
-        <img src="img/200/04@2x-100.jpg" alt="포트폴리오 이미지 1">
-        <img src="img/200/05@2x-100.jpg" alt="포트폴리오 이미지 1">
-        <img src="img/200/06@2x-100.jpg" alt="포트폴리오 이미지 1">
-        <img src="img/200/07@2x-100.jpg" alt="포트폴리오 이미지 1">
-        <img src="img/200/08@2x-100.jpg" alt="포트폴리오 이미지 1">
-        <img src="img/200/09@2x-100.jpg" alt="포트폴리오 이미지 1">
-        <img src="img/200/10@2x-100.jpg" alt="포트폴리오 이미지 1">
-        <img src="img/200/11@2x-100.jpg" alt="포트폴리오 이미지 1">
-        <img src="img/200/12@2x-100.jpg" alt="포트폴리오 이미지 1">
-        <img src="img/200/13@2x-100.jpg" alt="포트폴리오 이미지 1">
-        <img src="img/200/14@2x-100.jpg" alt="포트폴리오 이미지 1">
-        <img src="img/200/15@2x-100.jpg" alt="포트폴리오 이미지 1">
-        <img src="img/200/16@2x-100.jpg" alt="포트폴리오 이미지 1">
-        <img src="img/200/17@2x-100.jpg" alt="포트폴리오 이미지 1">
-        <img src="img/200/18@2x-100.jpg" alt="포트폴리오 이미지 1">
+        <img class="myImg" src="img/200/01@2x-100.jpg" alt="포트폴리오 이미지 1">
+        <img class="myImg" src="img/200/02@2x-100.jpg" alt="포트폴리오 이미지 2">
+        <img class="myImg" src="img/200/03@2x-100.jpg" alt="포트폴리오 이미지 3">
+        <img class="myImg" src="img/200/04@2x-100.jpg" alt="포트폴리오 이미지 4">
+        <img class="myImg" src="img/200/05@2x-100.jpg" alt="포트폴리오 이미지 5">
+        <img class="myImg" src="img/200/06@2x-100.jpg" alt="포트폴리오 이미지 6">
+        <img class="myImg" src="img/200/07@2x-100.jpg" alt="포트폴리오 이미지 7">
+        <img class="myImg" src="img/200/08@2x-100.jpg" alt="포트폴리오 이미지 8">
+        <img class="myImg" src="img/200/09@2x-100.jpg" alt="포트폴리오 이미지 9">
+        <img class="myImg" src="img/200/10@2x-100.jpg" alt="포트폴리오 이미지 10">
+        <img class="myImg" src="img/200/11@2x-100.jpg" alt="포트폴리오 이미지 11">
+        <img class="myImg" src="img/200/12@2x-100.jpg" alt="포트폴리오 이미지 12">
+        <img class="myImg" src="img/200/13@2x-100.jpg" alt="포트폴리오 이미지 13">
+        <img class="myImg" src="img/200/14@2x-100.jpg" alt="포트폴리오 이미지 14">
+        <img class="myImg" src="img/200/15@2x-100.jpg" alt="포트폴리오 이미지 15">
+        <img class="myImg" src="img/200/16@2x-100.jpg" alt="포트폴리오 이미지 16">
+        <img class="myImg" src="img/200/17@2x-100.jpg" alt="포트폴리오 이미지 17">
+        <img class="myImg" src="img/200/18@2x-100.jpg" alt="포트폴리오 이미지 18">
     </section>
 </div>
 </body>
+<script>
+    $('.myImg').on('error', function() {
+        let $this = $(this);
+        let maxAttempts = 3;
+        let attemptCount = $this.data('attempts') || 0;
+
+        if (attemptCount < maxAttempts) {
+            attemptCount++;
+            $this.data('attempts', attemptCount);
+            setTimeout(function() {
+                $this.attr('src', $this.attr('src') + '?' + new Date().getTime());
+            }, 1000);
+        } else {
+            console.log('Failed to load image after several attempts.');
+        }
+    });
+</script>
 </html>
