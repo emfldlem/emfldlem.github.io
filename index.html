@@ -2,58 +2,153 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="noindex, nofollow">
-    <title>GAEUN KIM PORTFOLIO 2024</title>
-    <link rel="stylesheet" href="css/styles.css"> <!-- styles.css 파일 불러오기 -->
+    <title>순천 파티움하우스 하객 추천 지도</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: #555;
+            font-family: 'Pretendard', sans-serif;
+            display: flex; justify-content: center; padding: 20px;
+        }
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        .page {
+            width: 210mm; height: 297mm;
+            background: white; padding: 15mm;
+            display: flex; flex-direction: column;
+        }
+
+        header {
+            border-bottom: 4px solid #FEE500; /* 카카오 포인트 컬러 */
+            padding-bottom: 15px; margin-bottom: 20px;
+            display: flex; justify-content: space-between; align-items: end;
+        }
+        header h1 { font-size: 28px; color: #1C1C1C; letter-spacing: -1px; }
+        header p { font-size: 14px; color: #666; text-align: right; }
+
+        /* 지도가 표시될 영역 */
+        #map {
+            flex: 1;
+            width: 100%;
+            background-color: #f0f0f0;
+            border: 2px solid #1C1C1C;
+            margin-bottom: 25px;
+        }
+
+        .info-section { height: 250px; display: flex; gap: 20px; }
+        .list-box { flex: 2.5; display: flex; flex-direction: column; justify-content: space-between; }
+        
+        .item { display: flex; align-items: flex-start; padding: 10px; border-bottom: 1px solid #ddd; }
+        .num {
+            background: #1C1C1C; color: white;
+            width: 24px; height: 24px; border-radius: 50%;
+            text-align: center; line-height: 24px;
+            font-size: 14px; font-weight: bold; margin-right: 12px; flex-shrink: 0;
+        }
+        .num.main { background: #FEE500; color: #1C1C1C; } /* 파티움 강조 */
+
+        .content h3 { font-size: 16px; margin-bottom: 4px; color: #1C1C1C; }
+        .content p { font-size: 13px; color: #666; line-height: 1.4; }
+        .tag { font-size: 11px; color: #d9480f; font-weight: bold; margin-left: 5px; }
+
+        .qr-box {
+            flex: 1; border: 2px solid #1C1C1C;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; background: #f9f9f9;
+        }
+        .qr-img { width: 110px; height: 110px; background: #ddd; margin: 10px 0; }
+        .qr-text { font-size: 12px; font-weight: bold; color: #333; }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <section class="gallery">
-            <img class="myImg" src="img/100/01-100.jpg" alt="포트폴리오 이미지 1">
-            <img class="myImg" src="img/100/02-100.jpg" alt="포트폴리오 이미지 1">
-            <img class="myImg" src="img/100/03-100.jpg" alt="포트폴리오 이미지 1">
-            <img class="myImg" src="img/100/04-100.jpg" alt="포트폴리오 이미지 1">
-            <img class="myImg" src="img/100/05-100.jpg" alt="포트폴리오 이미지 1">
-            <img class="myImg" src="img/100/06-100.jpg" alt="포트폴리오 이미지 1">
-            <img class="myImg" src="img/100/07-100.jpg" alt="포트폴리오 이미지 1">
-            <img class="myImg" src="img/100/08-100.jpg" alt="포트폴리오 이미지 1">
-            <img class="myImg" src="img/100/09-100.jpg" alt="포트폴리오 이미지 1">
-            <img class="myImg" src="img/100/10-100.jpg" alt="포트폴리오 이미지 1">
-            <img class="myImg" src="img/100/11-100.jpg" alt="포트폴리오 이미지 1">
-            <img class="myImg" src="img/100/12-100.jpg" alt="포트폴리오 이미지 1">
-            <img class="myImg" src="img/100/13-100.jpg" alt="포트폴리오 이미지 1">
-            <img class="myImg" src="img/100/14-100.jpg" alt="포트폴리오 이미지 1">
-            <img class="myImg" src="img/100/15-100.jpg" alt="포트폴리오 이미지 1">
-            <img class="myImg" src="img/100/16-100.jpg" alt="포트폴리오 이미지 1">
-            <img class="myImg" src="img/100/17-100.jpg" alt="포트폴리오 이미지 1">
-            <img class="myImg" src="img/100/18-100.jpg" alt="포트폴리오 이미지 1">
-        </section>
+    <div class="page">
+        <header>
+            <div>
+                <h1>순천 파티움하우스<br><span style="color:#e6c300">뒷풀이 & 핫플</span> 가이드</h1>
+            </div>
+            <p>결혼식 후 어디 갈지 고민이신가요?<br>현지인이 추천하는 BEST 코스</p>
+        </header>
+
+        <div id="map"></div>
+
+        <div class="info-section">
+            <div class="list-box">
+                <div class="item">
+                    <div class="num main">★</div>
+                    <div class="content">
+                        <h3>파티움하우스 (결혼식장)</h3>
+                        <p>전남 순천시 남승룡로 34</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="num">1</div>
+                    <div class="content">
+                        <h3>오몬떼 (Omonte) <span class="tag">차로 3분</span></h3>
+                        <p>가장 가까운 대형 정원 카페. 주차가 매우 편리합니다.</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="num">2</div>
+                    <div class="content">
+                        <h3>브루웍스 (Brewworks) <span class="tag">차로 10분</span></h3>
+                        <p>순천역 근처, 옛 창고를 개조한 힙한 카페.</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="num">3</div>
+                    <div class="content">
+                        <h3>순천만 국가정원 <span class="tag">관광 추천</span></h3>
+                        <p>순천의 랜드마크. 오천지구 방면 주차장 이용 추천.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="qr-box">
+                <div class="qr-text">더 많은 맛집/카페<br>스마트폰으로 보기</div>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://example.com" class="qr-img" alt="QR코드">
+                <div class="qr-text">▲ 카메라 스캔</div>
+            </div>
+        </div>
     </div>
-</body>
-<script>
-    $(document).ready(function() {
-        $("img").on("contextmenu", function(e) {
-            return false;  // 오른쪽 클릭 방지
-        });
-    });
 
-    $('.myImg').on('error', function() {
-        let $this = $(this);
-        let maxAttempts = 3;
-        let attemptCount = $this.data('attempts') || 0;
+    
+    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=8fc2009798229564e76abe6d35488ea6"></script>
+    <script>
+        var container = document.getElementById('map');
+        var options = {
+            center: new kakao.maps.LatLng(34.937748, 127.504245), // 파티움 중심
+            level: 6 // 확대 레벨 (숫자가 작을수록 확대됨, 5~6 추천)
+        };
 
-        if (attemptCount < maxAttempts) {
-            attemptCount++;
-            $this.data('attempts', attemptCount);
-            setTimeout(function() {
-                $this.attr('src', $this.attr('src') + '?' + new Date().getTime());
-            }, 1000);
-        } else {
-            console.log('Failed to load image after several attempts.');
+        var map = new kakao.maps.Map(container, options);
+
+        // 마커를 표시할 위치와 제목 데이터
+        var positions = [
+            { title: '파티움하우스', latlng: new kakao.maps.LatLng(34.937748, 127.504245) },
+            { title: '오몬떼', latlng: new kakao.maps.LatLng(34.9355, 127.5020) },
+            { title: '브루웍스', latlng: new kakao.maps.LatLng(34.9442, 127.4988) },
+            { title: '순천만국가정원', latlng: new kakao.maps.LatLng(34.9280, 127.5100) }
+        ];
+
+        // 마커 생성
+        for (var i = 0; i < positions.length; i ++) {
+            var marker = new kakao.maps.Marker({
+                map: map, 
+                position: positions[i].latlng,
+                title: positions[i].title
+            });
+            
+            // 마커 위에 이름 띄우기 (인포윈도우)
+            var iwContent = '<div style="padding:5px; font-size:12px; font-weight:bold;">' + positions[i].title + '</div>';
+            
+            var infowindow = new kakao.maps.InfoWindow({
+                position : positions[i].latlng, 
+                content : iwContent 
+            });
+            
+            infowindow.open(map, marker);
         }
-    });
-</script>
+    </script>
+</body>
 </html>
