@@ -15,12 +15,26 @@
 </head>
 <body class="bg-[#FDFBF7] text-gray-800 pb-20">
 
-    <header class="text-center py-8 px-4">
-        <p class="text-xs text-gray-500 mb-1 tracking-widest">WEDDING RECEPTION</p>
-        <h1 class="text-2xl font-serif font-bold text-gray-900">철수 & 영희의 추천 리스트</h1>
-    </header>
+    <header class="relative h-80 overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover object-center scale-105" alt="웨딩 배경">
+        
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
 
-    <nav class="sticky top-0 z-40 bg-[#FDFBF7]/95 backdrop-blur-sm py-3 border-b border-gray-200 mb-6">
+        <div class="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-6">
+            <p class="text-xs uppercase tracking-[0.3em] text-white/80 mb-5">Thank You For Coming</p>
+            <h1 class="text-3xl sm:text-4xl font-serif font-bold mb-4 drop-shadow-sm">철수 & 영희의<br>추천 맛집 리스트</h1>
+            <p class="text-sm sm:text-base text-white/90 max-w-md leading-relaxed font-light opacity-90">
+                귀한 발걸음 해주셔서 진심으로 감사합니다.<br>
+                식사 후 가볍게 들르실 수 있는 주변 곳들을 모았습니다.
+            </p>
+            <div class="mt-6 text-white/50">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mx-auto">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
+                </svg>
+            </div>
+        </div>
+    </header>
+    <nav class="sticky top-0 z-40 bg-[#FDFBF7]/95 backdrop-blur-sm py-4 border-b border-gray-200 mb-8 mt-[-20px] rounded-t-3xl shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
         <div class="flex justify-center gap-2 px-4 overflow-x-auto scrollbar-hide">
             <button onclick="filterCards('all', this)" class="filter-btn px-4 py-1.5 bg-gray-900 text-white rounded-full text-xs font-medium shadow-md whitespace-nowrap transition-all">전체보기</button>
             <button onclick="filterCards('food', this)" class="filter-btn px-4 py-1.5 bg-white text-gray-600 border border-gray-300 rounded-full text-xs font-medium whitespace-nowrap transition-all">🍽️ 맛집</button>
@@ -30,8 +44,7 @@
     </nav>
 
     <main class="max-w-3xl mx-auto px-4">
-        <div class="grid grid-cols-2 gap-3" id="card-container">
-            </div>
+        <div class="grid grid-cols-2 gap-3" id="card-container"></div>
     </main>
 
     <footer class="fixed bottom-0 w-full bg-white border-t border-gray-200 py-4 px-6 text-center z-50">
@@ -39,12 +52,10 @@
     </footer>
 
     <script>
-        // ============================================================
-        // [1] 데이터 관리 영역 (여기만 수정하면 화면이 바뀝니다!)
-        // ============================================================
+        // [1] 데이터 관리 영역
         const placeData = [
             {
-                category: "food",      // food(맛집), cafe(카페), pub(뒷풀이) 중 하나
+                category: "food",
                 name: "도산공원 파스타",
                 subTitle: "양식",
                 image: "https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=400&auto=format&fit=crop",
@@ -70,7 +81,7 @@
                 name: "아이리쉬 펍",
                 subTitle: "맥주",
                 image: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=400&auto=format&fit=crop",
-                distance: "👣 도보 7분",
+                distance: "👣 도보 8분",
                 tag: "🍺 뒷풀이",
                 comment: "결혼식 끝나고 친구들끼리 맥주 한잔하기 딱 좋은 분위기!",
                 mapUrl: "#",
@@ -89,17 +100,11 @@
             }
         ];
 
-        // ============================================================
-        // [2] 화면 그리기 기능 (수정하지 마세요)
-        // ============================================================
+        // [2] 화면 그리기 기능
         const container = document.getElementById('card-container');
-
-        // 데이터를 기반으로 HTML을 만들어서 넣는 함수
         function renderCards() {
-            container.innerHTML = ""; // 일단 비우고 시작
-
+            container.innerHTML = "";
             placeData.forEach(place => {
-                // HTML 템플릿 생성
                 const cardHTML = `
                     <div class="place-card bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 flex flex-col h-full" data-category="${place.category}">
                         <div class="relative h-36 bg-gray-200">
@@ -130,12 +135,9 @@
             });
         }
 
-        // ============================================================
         // [3] 필터링 기능
-        // ============================================================
         function filterCards(category, btnElement) {
             const cards = document.querySelectorAll('.place-card');
-            
             cards.forEach(card => {
                 if (category === 'all' || card.dataset.category === category) {
                     card.style.display = 'flex';
@@ -143,8 +145,6 @@
                     card.style.display = 'none';
                 }
             });
-
-            // 버튼 스타일 초기화 및 활성화
             const buttons = document.querySelectorAll('.filter-btn');
             buttons.forEach(btn => {
                 btn.className = "filter-btn px-4 py-1.5 bg-white text-gray-600 border border-gray-300 rounded-full text-xs font-medium whitespace-nowrap cursor-pointer hover:bg-gray-50 transition-all";
@@ -152,9 +152,7 @@
             btnElement.className = "filter-btn px-4 py-1.5 bg-gray-900 text-white rounded-full text-xs font-medium shadow-md whitespace-nowrap cursor-pointer transition-all transform scale-105";
         }
 
-        // 페이지가 열리자마자 실행
         renderCards();
-
     </script>
 </body>
 </html>
