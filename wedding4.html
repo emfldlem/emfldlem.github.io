@@ -3,118 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>결혼식 뒷풀이 가이드</title>
+    <title>결혼식 뒷풀이 가이드 (2단)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* 우아한 분위기를 위한 폰트 설정 */
         @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
-        /* 제목용 명조체 (Google Fonts - Gowun Batang) */
         @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap');
 
         body { font-family: "Pretendard", sans-serif; }
         .font-serif { font-family: "Gowun Batang", serif; }
+        
+        /* 스크롤바 숨기기 (카테고리 영역 깔끔하게) */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
     </style>
 </head>
-<body class="bg-[#FDFBF7] text-gray-800"> <header class="text-center py-10 px-4">
-        <p class="text-sm text-gray-500 mb-2 tracking-widest">THANK YOU FOR COMING</p>
-        <h1 class="text-3xl font-serif font-bold text-gray-900 mb-4">귀한 발걸음 감사합니다</h1>
-        <p class="text-gray-600 leading-relaxed text-sm">
-            오랜만에 만난 분들과 즐거운 시간 보내시도록<br>
-            웨딩홀 주변의 괜찮은 곳들을 모아봤습니다.<br>
-            맛있는 식사와 커피를 즐겨주세요.
-        </p>
+<body class="bg-[#FDFBF7] text-gray-800 pb-20">
+
+    <header class="text-center py-8 px-4">
+        <p class="text-xs text-gray-500 mb-1 tracking-widest">WEDDING RECEPTION</p>
+        <h1 class="text-2xl font-serif font-bold text-gray-900">식후에 가볼만한 곳</h1>
     </header>
 
-    <nav class="sticky top-0 z-40 bg-[#FDFBF7]/95 backdrop-blur-sm py-4 border-b border-gray-200">
-        <div class="flex justify-center gap-4">
-            <button class="px-6 py-2 bg-gray-900 text-white rounded-full text-sm font-medium shadow-md transition-transform hover:scale-105">🍽️ 맛집 추천</button>
-            <button class="px-6 py-2 bg-white text-gray-600 border border-gray-300 rounded-full text-sm font-medium hover:bg-gray-50 transition-transform hover:scale-105">☕ 카페/디저트</button>
+    <nav class="sticky top-0 z-40 bg-[#FDFBF7]/95 backdrop-blur-sm py-3 border-b border-gray-200 mb-6">
+        <div class="flex justify-center gap-2 px-4 overflow-x-auto scrollbar-hide">
+            <button class="px-4 py-1.5 bg-gray-900 text-white rounded-full text-xs font-medium shadow-md whitespace-nowrap">🍽️ 맛집</button>
+            <button class="px-4 py-1.5 bg-white text-gray-600 border border-gray-300 rounded-full text-xs font-medium whitespace-nowrap">☕ 카페</button>
+            <button class="px-4 py-1.5 bg-white text-gray-600 border border-gray-300 rounded-full text-xs font-medium whitespace-nowrap">🍺 뒷풀이</button>
         </div>
     </nav>
 
-    <main class="max-w-3xl mx-auto px-4 py-8 pb-24">
-        <div class="grid grid-cols-1 gap-8">
+    <main class="max-w-3xl mx-auto px-4">
+        <div class="grid grid-cols-2 gap-3">
 
-            <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 border border-gray-100">
-                <div class="relative h-56">
-                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="맛집 사진">
-                    <div class="absolute bottom-3 left-3 bg-black/80 text-white px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1">
-                        👣 웨딩홀에서 도보 5분
+            <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 flex flex-col h-full">
+                <div class="relative h-32 bg-gray-200">
+                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?q=80&w=400&auto=format&fit=crop" class="w-full h-full object-cover" alt="맛집">
+                    <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-2 pt-6">
+                        <span class="text-white text-[10px] font-bold flex items-center gap-1">
+                            👣 도보 5분
+                        </span>
                     </div>
                 </div>
                 
-                <div class="p-5">
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-xl font-serif font-bold text-gray-900">도산공원 파스타</h3>
-                        <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">양식</span>
-                    </div>
-                    
-                    <div class="bg-[#FAF7F2] p-3 rounded-lg mb-4">
-                        <p class="text-sm text-gray-700 italic">
-                            "신부가 청첩장 모임 때 가장 많이 갔던 곳이에요. <br>특히 <b>트러플 뇨끼</b>가 정말 맛있으니 꼭 드셔보세요!"
-                        </p>
+                <div class="p-3 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-1">
+                            <h3 class="text-sm font-bold text-gray-900 truncate pr-1">도산공원 파스타</h3>
+                            <span class="text-[10px] text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded flex-shrink-0">양식</span>
+                        </div>
+                        
+                        <div class="bg-[#FAF7F2] p-2 rounded-md mb-2">
+                            <p class="text-[11px] text-gray-600 leading-tight line-clamp-2">
+                                "신부가 청첩장 모임 때 가장 많이 갔던 곳! 트러플 뇨끼 강추합니다."
+                            </p>
+                        </div>
                     </div>
 
-                    <div class="flex justify-between items-center border-t border-gray-100 pt-4">
-                        <div class="text-xs text-gray-500 space-y-1">
-                            <p>🕒 브레이크 타임 없음</p>
-                            <p>🚗 발렛 주차 가능</p>
-                        </div>
-                        <div class="flex gap-2">
-                            <button class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200">
-                                📞
-                            </button>
-                            <button class="px-4 py-2 bg-yellow-400 text-black text-sm font-bold rounded-full hover:bg-yellow-500">
-                                길찾기
-                            </button>
-                        </div>
+                    <div class="flex gap-1 mt-auto">
+                        <button class="flex-1 bg-yellow-400 py-1.5 rounded-md text-[11px] font-bold text-gray-900 hover:bg-yellow-500">
+                            길찾기
+                        </button>
+                        <button class="w-7 h-7 bg-gray-100 rounded-md flex items-center justify-center text-gray-600">
+                            📞
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300 border border-gray-100">
-                <div class="relative h-56">
-                    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover" alt="카페 사진">
-                    <div class="absolute bottom-3 left-3 bg-black/80 text-white px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1">
-                        🚗 웨딩홀에서 차로 3분
+            <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 flex flex-col h-full">
+                <div class="relative h-32 bg-gray-200">
+                    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=400&auto=format&fit=crop" class="w-full h-full object-cover" alt="카페">
+                    <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-2 pt-6">
+                        <span class="text-white text-[10px] font-bold flex items-center gap-1">
+                            🚗 차로 3분
+                        </span>
                     </div>
                 </div>
                 
-                <div class="p-5">
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-xl font-serif font-bold text-gray-900">카페 아르크</h3>
-                        <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">대형카페</span>
-                    </div>
-                    
-                    <div class="bg-[#FAF7F2] p-3 rounded-lg mb-4">
-                        <p class="text-sm text-gray-700 italic">
-                            "단체석이 많아서 여러 명이 가기 좋아요. <br>커피 못 드시는 분들을 위한 <b>생과일 주스</b>도 훌륭합니다."
-                        </p>
+                <div class="p-3 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-1">
+                            <h3 class="text-sm font-bold text-gray-900 truncate pr-1">카페 아르크</h3>
+                            <span class="text-[10px] text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded flex-shrink-0">카페</span>
+                        </div>
+                        
+                        <div class="bg-[#FAF7F2] p-2 rounded-md mb-2">
+                            <p class="text-[11px] text-gray-600 leading-tight line-clamp-2">
+                                "단체석 완전 많음! 커피 못 드시는 분들 생과일주스 드세요."
+                            </p>
+                        </div>
                     </div>
 
-                    <div class="flex justify-between items-center border-t border-gray-100 pt-4">
-                        <div class="text-xs text-gray-500 space-y-1">
-                            <p>🕒 22:00 까지 영업</p>
-                            <p>🚗 주차장 넓음 (무료)</p>
+                    <div class="flex gap-1 mt-auto">
+                        <button class="flex-1 bg-yellow-400 py-1.5 rounded-md text-[11px] font-bold text-gray-900 hover:bg-yellow-500">
+                            길찾기
+                        </button>
+                        <button class="w-7 h-7 bg-gray-100 rounded-md flex items-center justify-center text-gray-600">
+                            📞
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 flex flex-col h-full">
+                <div class="relative h-32 bg-gray-200">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=400&auto=format&fit=crop" class="w-full h-full object-cover" alt="샐러드">
+                    <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-2 pt-6">
+                        <span class="text-white text-[10px] font-bold flex items-center gap-1">
+                            👣 도보 3분
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-3 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-1">
+                            <h3 class="text-sm font-bold text-gray-900 truncate pr-1">프레시 가든</h3>
+                            <span class="text-[10px] text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded flex-shrink-0">브런치</span>
                         </div>
-                        <div class="flex gap-2">
-                            <button class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200">
-                                📞
-                            </button>
-                            <button class="px-4 py-2 bg-yellow-400 text-black text-sm font-bold rounded-full hover:bg-yellow-500">
-                                길찾기
-                            </button>
+                        
+                        <div class="bg-[#FAF7F2] p-2 rounded-md mb-2">
+                            <p class="text-[11px] text-gray-600 leading-tight line-clamp-2">
+                                "가볍게 드실 분들 추천해요. 아보카도 샐러드가 예술입니다."
+                            </p>
                         </div>
+                    </div>
+
+                    <div class="flex gap-1 mt-auto">
+                        <button class="flex-1 bg-yellow-400 py-1.5 rounded-md text-[11px] font-bold text-gray-900 hover:bg-yellow-500">
+                            길찾기
+                        </button>
+                        <button class="w-7 h-7 bg-gray-100 rounded-md flex items-center justify-center text-gray-600">
+                            📞
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 flex flex-col h-full">
+                <div class="relative h-32 bg-gray-200">
+                    <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=400&auto=format&fit=crop" class="w-full h-full object-cover" alt="펍">
+                    <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-2 pt-6">
+                        <span class="text-white text-[10px] font-bold flex items-center gap-1">
+                            👣 도보 7분
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="p-3 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-1">
+                            <h3 class="text-sm font-bold text-gray-900 truncate pr-1">아이리쉬 펍</h3>
+                            <span class="text-[10px] text-gray-500 bg-gray-100 px-1.5 py-0.5 rounded flex-shrink-0">술집</span>
+                        </div>
+                        
+                        <div class="bg-[#FAF7F2] p-2 rounded-md mb-2">
+                            <p class="text-[11px] text-gray-600 leading-tight line-clamp-2">
+                                "결혼식 끝나고 친구들끼리 맥주 한잔하기 딱 좋은 분위기!"
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-1 mt-auto">
+                        <button class="flex-1 bg-yellow-400 py-1.5 rounded-md text-[11px] font-bold text-gray-900 hover:bg-yellow-500">
+                            길찾기
+                        </button>
+                        <button class="w-7 h-7 bg-gray-100 rounded-md flex items-center justify-center text-gray-600">
+                            📞
+                        </button>
                     </div>
                 </div>
             </div>
 
         </div>
     </main>
-
-    <footer class="fixed bottom-0 w-full bg-white border-t border-gray-200 py-4 px-6 text-center z-50">
-        <p class="text-xs text-gray-400">행복하게 잘 살겠습니다! - OO & OO 올림</p>
-    </footer>
 
 </body>
 </html>
