@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>순천 파티움하우스 하객 추천 지도</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
         
@@ -10,83 +11,79 @@
         body {
             background-color: #555;
             font-family: 'Pretendard', sans-serif;
-            display: flex; justify-content: center; padding: 20px;
+            display: flex; justify-content: center; 
+            padding: 0; /* 모바일 대응을 위해 패딩 제거 */
         }
 
         .page {
-            width: 210mm; height: 297mm; /* A4 사이즈 */
-            background: white; padding: 15mm;
+            width: 100%; /* 모바일 대응 */
+            max-width: 210mm; /* PC에서는 A4 폭 유지 */
+            min-height: 100vh; /* 화면 꽉 채우기 */
+            background: white; padding: 20px;
             display: flex; flex-direction: column;
         }
 
         header {
-            border-bottom: 4px solid #FEE500; /* 카카오 노란색 */
+            border-bottom: 4px solid #FEE500;
             padding-bottom: 15px; margin-bottom: 20px;
             display: flex; justify-content: space-between; align-items: end;
         }
-        header h1 { font-size: 26px; color: #1C1C1C; letter-spacing: -1px; }
-        header p { font-size: 13px; color: #666; text-align: right; }
+        header h1 { font-size: 24px; color: #1C1C1C; letter-spacing: -1px; word-break: keep-all; }
+        header p { font-size: 12px; color: #666; text-align: right; min-width: 80px;}
 
         /* 지도 영역 */
         #map {
-            flex: 1.2; /* 지도를 좀 더 크게 */
             width: 100%;
+            height: 400px; /* 높이 고정 */
             background-color: #f0f0f0;
             border: 2px solid #1C1C1C;
             margin-bottom: 20px;
         }
 
-        /* 하단 2단 레이아웃 */
-        .info-section { 
-            height: 350px; /* 리스트가 늘어나서 높이 키움 */
-            display: flex; gap: 15px; 
-        }
-
-        /* 왼쪽 리스트 (스크롤 가능하게 변경) */
+        /* 리스트 영역 */
         .list-box { 
-            flex: 2.5; 
             display: flex; flex-direction: column; 
-            overflow-y: hidden; /* 인쇄용이라 스크롤 숨김 */
+            margin-bottom: 20px;
         }
         
         .list-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr; /* 2열로 배치 */
-            column-gap: 15px;
-            row-gap: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
         .item { 
             display: flex; align-items: center; 
-            padding: 6px 0; border-bottom: 1px solid #eee; 
+            padding: 8px 0; border-bottom: 1px solid #eee; 
         }
         .num {
             background: #1C1C1C; color: white;
-            width: 20px; height: 20px; border-radius: 50%;
-            text-align: center; line-height: 20px;
-            font-size: 12px; font-weight: bold; margin-right: 8px; flex-shrink: 0;
+            width: 24px; height: 24px; border-radius: 50%;
+            text-align: center; line-height: 24px;
+            font-size: 12px; font-weight: bold; margin-right: 10px; flex-shrink: 0;
         }
-        .num.main { background: #FEE500; color: #1C1C1C; } /* 파티움 */
-        .num.cafe { background: #ff7e5f; } /* 카페는 살구색 */
-        .num.food { background: #00b09b; } /* 맛집은 민트색 */
+        .num.main { background: #FEE500; color: #1C1C1C; } 
+        .num.cafe { background: #ff7e5f; }
+        .num.food { background: #00b09b; }
 
-        .content h3 { font-size: 14px; margin-bottom: 2px; color: #1C1C1C; }
-        .content p { font-size: 11px; color: #666; }
-        .tag { font-size: 10px; color: #d9480f; font-weight: bold; margin-left: 3px; }
+        .content h3 { font-size: 16px; margin-bottom: 4px; color: #1C1C1C; }
+        .content p { font-size: 13px; color: #666; }
+        .tag { font-size: 11px; color: #d9480f; font-weight: bold; margin-left: 5px; }
 
+        /* 모바일에서는 QR코드 숨기기 (폰으로 보고 있는데 QR 찍을 필요 없으므로) */
         .qr-box {
-            flex: 0.8; 
+            display: none; /* 일단 숨김 처리 */
             border: 2px solid #1C1C1C;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            text-align: center; background: #f9f9f9; height: 100%;
+            flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; background: #f9f9f9; padding: 10px;
         }
-        .qr-img { width: 100px; height: 100px; background: #ddd; margin: 10px 0; }
-        .qr-text { font-size: 12px; font-weight: bold; color: #333; }
 
-        @media print {
-            body { background: none; padding: 0; }
-            .page { margin: 0; width: 100%; height: 100%; }
-            #map { -webkit-print-color-adjust: exact; } /* 지도 배경색 강제 출력 */
+        @media screen and (min-width: 768px) {
+             /* PC 화면일 때 */
+            .info-section { display: flex; gap: 20px; }
+            .list-box { flex: 2.5; }
+            .qr-box { display: flex; flex: 1; height: auto; }
+            .page { height: 297mm; padding: 15mm; } /* A4 높이 */
         }
     </style>
 </head>
@@ -94,9 +91,9 @@
     <div class="page">
         <header>
             <div>
-                <h1>순천 파티움하우스 <span style="color:#d9480f">뒷풀이 & 맛집</span> 지도</h1>
+                <h1>순천 파티움하우스 <span style="color:#d9480f">뒷풀이 & 맛집</span></h1>
             </div>
-            <p>결혼식 와주셔서 감사합니다.<br>그냥 가기 아쉬운 분들을 위한 추천 코스!</p>
+            <p>현지인 추천<br>BEST 9</p>
         </header>
 
         <div id="map"></div>
@@ -104,7 +101,7 @@
         <div class="info-section">
             <div class="list-box">
                 <div class="list-grid">
-                    <div class="item" style="grid-column: span 2; border-bottom: 2px solid #333; padding-bottom:10px; margin-bottom:5px;">
+                    <div class="item" style="border-bottom: 2px solid #333; background-color: #fff9db; padding: 10px; border-radius: 8px;">
                         <div class="num main">★</div>
                         <div class="content">
                             <h3>파티움하우스 (현재 위치)</h3>
@@ -172,70 +169,10 @@
             </div>
 
             <div class="qr-box">
-                <div class="qr-text">더 상세한 정보 &<br>네비게이션 연동</div>
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://github.com" class="qr-img" alt="QR코드">
-                <div class="qr-text">▲ 카메라 스캔</div>
+                <div class="qr-text">모바일로 보기</div>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://emfldlem.github.io" class="qr-img" alt="QR코드">
             </div>
         </div>
     </div>
 
-    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=8fc2009798229564e76abe6d35488ea6"></script>
-    
-    <script>
-        var container = document.getElementById('map');
-        var options = {
-            center: new kakao.maps.LatLng(34.937748, 127.504245), 
-            level: 7 
-        };
-
-        var map = new kakao.maps.Map(container, options);
-
-        // 좌표 데이터 (대략적인 위치)
-        var places = [
-            { title: '파티움하우스', lat: 34.937748, lng: 127.504245, type: 'main' },
-            { title: '1. 오몬떼', lat: 34.9355, lng: 127.5020, type: 'cafe' },
-            { title: '2. 오버랩', lat: 34.9365, lng: 127.5035, type: 'cafe' },
-            { title: '3. 브루웍스', lat: 34.9442, lng: 127.4988, type: 'cafe' },
-            { title: '4. 밀림슈퍼', lat: 34.9455, lng: 127.4980, type: 'cafe' },
-            { title: '5. 청춘창고', lat: 34.9440, lng: 127.4995, type: 'cafe' },
-            { title: '6. 풍미통닭', lat: 34.9475, lng: 127.4950, type: 'food' },
-            { title: '7. 금빈회관', lat: 34.9520, lng: 127.4850, type: 'food' },
-            { title: '8. 국가정원', lat: 34.9280, lng: 127.5100, type: 'tour' }
-        ];
-
-        // 지도가 모든 마커를 포함하도록 범위 설정
-        var bounds = new kakao.maps.LatLngBounds();
-
-        for (var i = 0; i < places.length; i++) {
-            var p = places[i];
-            var markerPosition = new kakao.maps.LatLng(p.lat, p.lng);
-            
-            // 마커 이미지 설정 (색상 구분)
-            var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png'; // 기본 별
-            var imageSize = new kakao.maps.Size(24, 35); 
-            
-            // 실제 구현시엔 기본 마커 사용하고 번호는 인포윈도우로 띄웁니다
-            var marker = new kakao.maps.Marker({
-                map: map,
-                position: markerPosition,
-                title: p.title
-            });
-
-            // 마커 위에 항상 이름 띄우기
-            var content = '<div style="padding:3px; font-size:11px; font-weight:bold; border-radius:4px; border:1px solid #333; background:white; white-space:nowrap;">' + p.title + '</div>';
-            var customOverlay = new kakao.maps.CustomOverlay({
-                position: markerPosition,
-                content: content,
-                yAnchor: 2.2 // 마커 머리 위로 올리기
-            });
-            customOverlay.setMap(map);
-
-            // 범위 재설정을 위해 좌표 추가
-            bounds.extend(markerPosition);
-        }
-
-        // 모든 마커가 보이게 지도 범위 재설정
-        map.setBounds(bounds);
-    </script>
-</body>
-</html>
+    <script type="text/javascript" src="
