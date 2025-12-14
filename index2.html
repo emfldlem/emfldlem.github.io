@@ -1,59 +1,20 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GAEUN KIM PORTFOLIO 2024</title>
-    <link rel="stylesheet" href="css/styles.css"> <!-- styles.css 파일 불러오기 -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+	<meta charset="utf-8"/>
+	<title>Kakao 지도 시작하기</title>
 </head>
-
 <body>
-<div class="container">
-    <section class="gallery">
-        <img class="myImg" src="img/200/01@2x-100.jpg" alt="포트폴리오 이미지 1">
-        <img class="myImg" src="img/200/02@2x-100.jpg" alt="포트폴리오 이미지 2">
-        <img class="myImg" src="img/200/03@2x-100.jpg" alt="포트폴리오 이미지 3">
-        <img class="myImg" src="img/200/04@2x-100.jpg" alt="포트폴리오 이미지 4">
-        <img class="myImg" src="img/200/05@2x-100.jpg" alt="포트폴리오 이미지 5">
-        <img class="myImg" src="img/200/06@2x-100.jpg" alt="포트폴리오 이미지 6">
-        <img class="myImg" src="img/200/07@2x-100.jpg" alt="포트폴리오 이미지 7">
-        <img class="myImg" src="img/200/08@2x-100.jpg" alt="포트폴리오 이미지 8">
-        <img class="myImg" src="img/200/09@2x-100.jpg" alt="포트폴리오 이미지 9">
-        <img class="myImg" src="img/200/10@2x-100.jpg" alt="포트폴리오 이미지 10">
-        <img class="myImg" src="img/200/11@2x-100.jpg" alt="포트폴리오 이미지 11">
-        <img class="myImg" src="img/200/12@2x-100.jpg" alt="포트폴리오 이미지 12">
-        <img class="myImg" src="img/200/13@2x-100.jpg" alt="포트폴리오 이미지 13">
-        <img class="myImg" src="img/200/14@2x-100.jpg" alt="포트폴리오 이미지 14">
-        <img class="myImg" src="img/200/15@2x-100.jpg" alt="포트폴리오 이미지 15">
-        <img class="myImg" src="img/200/16@2x-100.jpg" alt="포트폴리오 이미지 16">
-        <img class="myImg" src="img/200/17@2x-100.jpg" alt="포트폴리오 이미지 17">
-        <img class="myImg" src="img/200/18@2x-100.jpg" alt="포트폴리오 이미지 18">
-    </section>
-</div>
+	<div id="map" style="width:500px;height:400px;"></div>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8fc2009798229564e76abe6d35488ea6"></script>
+	<script>
+		var container = document.getElementById('map');
+		var options = {
+			center: new kakao.maps.LatLng(33.450701, 126.570667),
+			level: 3
+		};
+
+		var map = new kakao.maps.Map(container, options);
+	</script>
 </body>
-<script>
-    $(document).ready(function() {
-        $("img").on("contextmenu", function(e) {
-            return false;  // 오른쪽 클릭 방지
-        });
-    });
-
-    $('.myImg').on('error', function() {
-        let $this = $(this);
-        let maxAttempts = 3;
-        let attemptCount = $this.data('attempts') || 0;
-
-        if (attemptCount < maxAttempts) {
-            attemptCount++;
-            $this.data('attempts', attemptCount);
-            setTimeout(function() {
-                $this.attr('src', $this.attr('src') + '?' + new Date().getTime());
-            }, 1000);
-        } else {
-            console.log('Failed to load image after several attempts.');
-        }
-    });
-</script>
 </html>
