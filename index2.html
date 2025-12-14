@@ -1,20 +1,197 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-	<meta charset="utf-8"/>
-	<title>Kakao 지도 시작하기</title>
+    <meta charset="UTF-8">
+    <title>순천 파티움하우스 하객 추천 지도</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=bv903cidxx"></script>
+
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            display: flex; flex-direction: column;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        header h1 { font-size: 22px; margin-bottom: 5px; color: #1C1C1C; }
+        header p { font-size: 13px; color: #666; }
+        .highlight { color: #03C75A; font-weight: 800; }
+
+        /* 지도 영역 */
+        #map {
+            width: 100%;
+            height: 400px; /* 지도 높이 */
+            background-color: #eee;
+        }
+
+        /* 리스트 영역 */
+        .list-area { padding: 20px; flex: 1; }
+        .place-item {
+            display: flex; align-items: flex-start;
+            padding: 15px 0; border-bottom: 1px solid #f0f0f0;
+            cursor: pointer; /* 클릭 가능 표시 */
+        }
+        .place-item:active { background-color: #f9f9f9; }
+
+        .marker-num {
+            background: #333; color: white;
+            width: 24px; height: 24px; border-radius: 50%;
+            text-align: center; line-height: 24px;
+            font-size: 12px; font-weight: bold; margin-right: 12px; flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .marker-num.main { background: #03C75A; } /* 네이버 그린 */
+
+        .info h3 { font-size: 16px; margin-bottom: 4px; color: #1C1C1C; }
+        .info p { font-size: 13px; color: #888; margin-bottom: 6px; }
+        .tags span {
+            display: inline-block; background: #f2f2f2; color: #666;
+            font-size: 11px; padding: 2px 6px; border-radius: 4px; margin-right: 4px;
+        }
+
+        .btn-naver {
+            display: block; width: 100%; padding: 12px;
+            margin-top: 20px; background: #03C75A; color: white;
+            text-align: center; text-decoration: none; font-weight: bold;
+            border-radius: 8px; font-size: 14px;
+        }
+        .btn-naver:hover { background-color: #02b351; }
+    </style>
 </head>
 <body>
-	<div id="map" style="width:500px;height:400px;"></div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8fc2009798229564e76abe6d35488ea6"></script>
-	<script>
-		var container = document.getElementById('map');
-		var options = {
-			center: new kakao.maps.LatLng(33.450701, 126.570667),
-			level: 3
-		};
 
-		var map = new kakao.maps.Map(container, options);
-	</script>
+<div class="container">
+    <header>
+        <h1>순천 파티움 <span class="highlight">하객 지도</span></h1>
+        <p>현지인이 추천하는 뒷풀이 & 핫플 9선</p>
+    </header>
+
+    <div id="map"></div>
+
+    <div class="list-area">
+        <div id="place-list">
+            </div>
+        
+        <a href="https://map.naver.com" target="_blank" class="btn-naver">네이버 지도 앱으로 보기</a>
+    </div>
+</div>
+
+<script>
+    // 1. 데이터 준비
+    var places = [
+        { lat: 34.937748, lng: 127.504245, title: '파티움하우스 (현위치)', desc: '결혼식장', tags: ['주인공'], type: 'main' },
+        { lat: 34.9355, lng: 127.5020, title: '1. 오몬떼', desc: '가장 가까운 대형 정원 카페', tags: ['3분거리', '주차편함'] },
+        { lat: 34.9365, lng: 127.5035, title: '2. 오버랩 오천점', desc: '예식장 바로 앞 대형 베이커리', tags: ['도보가능', '디저트'] },
+        { lat: 34.9442, lng: 127.4988, title: '3. 브루웍스', desc: '순천 핫플 1대장! 창고형 카페', tags: ['힙한감성', '사진맛집'] },
+        { lat: 34.9455, lng: 127.4980, title: '4. 밀림슈퍼', desc: '레트로 감성 뿜뿜 사진 맛집', tags: ['레트로', '밀크티'] },
+        { lat: 34.9440, lng: 127.4995, title: '5. 청춘창고', desc: '브루웍스 옆 복합문화공간', tags: ['청년창업', '간식'] },
+        { lat: 34.9475, lng: 127.4950, title: '6. 풍미통닭', desc: '압력밥솥 마늘통닭 (줄서서 먹음)', tags: ['3대천왕', '맛집'] },
+        { lat: 34.9520, lng: 127.4850, title: '7. 금빈회관', desc: '입안 가득 떡갈비 정식', tags: ['한정식', '떡갈비'] },
+        { lat: 34.9280, lng: 127.5100, title: '8. 국가정원', desc: '순천의 랜드마크 (오천지구 입구)', tags: ['산책', '관광'] }
+    ];
+
+    // 2. 지도 생성 옵션
+    var mapOptions = {
+        center: new naver.maps.LatLng(34.9400, 127.5000),
+        zoom: 14
+    };
+    
+    // 지도 그리기
+    var map = new naver.maps.Map('map', mapOptions);
+
+    var infowindow = new naver.maps.InfoWindow({
+        maxWidth: 300,
+        backgroundColor: "#fff",
+        borderColor: "#ccc",
+        borderWidth: 1,
+        anchorSkew: true,
+        anchorColor: "#fff"
+    });
+
+    var listContainer = document.getElementById('place-list');
+
+    // 3. 마커 및 리스트 생성
+    places.forEach(function(place, index) {
+        // (1) 마커 생성
+        var marker = new naver.maps.Marker({
+            position: new naver.maps.LatLng(place.lat, place.lng),
+            map: map,
+            title: place.title
+        });
+
+        // 파티움하우스 마커만 특별하게 (초록색)
+        if(place.type === 'main') {
+            marker.setIcon({
+                content: '<div style="background:#03C75A; color:white; padding:5px 12px; border-radius:20px; font-weight:bold; box-shadow:0 2px 5px rgba(0,0,0,0.3); font-size:13px;">★ 파티움</div>',
+                anchor: new naver.maps.Point(40, 40)
+            });
+        }
+
+        // 말풍선 내용
+        var contentString = [
+            '<div style="padding:10px; min-width:150px; text-align:center;">',
+            '   <h4 style="margin:0 0 5px 0; font-size:14px;">' + place.title + '</h4>',
+            '   <p style="margin:0; font-size:12px; color:#666;">' + place.desc + '</p>',
+            '</div>'
+        ].join('');
+
+        // 마커 클릭 이벤트
+        naver.maps.Event.addListener(marker, "click", function(e) {
+            if (infowindow.getMap()) {
+                infowindow.close();
+            } else {
+                infowindow.setContent(contentString);
+                infowindow.open(map, marker);
+            }
+        });
+
+        // (2) 하단 리스트 생성
+        var itemDiv = document.createElement('div');
+        itemDiv.className = 'place-item';
+        
+        var numIcon = place.type === 'main' ? '★' : index; 
+        var numClass = place.type === 'main' ? 'marker-num main' : 'marker-num';
+        var tagsHtml = place.tags.map(tag => `<span>#${tag}</span>`).join('');
+
+        itemDiv.innerHTML = `
+            <div class="${numClass}">${numIcon}</div>
+            <div class="info">
+                <h3>${place.title}</h3>
+                <p>${place.desc}</p>
+                <div class="tags">${tagsHtml}</div>
+            </div>
+        `;
+
+        // 리스트 클릭 시 이동 이벤트
+        itemDiv.addEventListener('click', function() {
+            var center = new naver.maps.LatLng(place.lat, place.lng);
+            map.setCenter(center);
+            map.setZoom(16);
+            infowindow.setContent(contentString);
+            infowindow.open(map, marker);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        listContainer.appendChild(itemDiv);
+    });
+</script>
+
 </body>
 </html>
