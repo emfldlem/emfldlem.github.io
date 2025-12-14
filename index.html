@@ -153,3 +153,89 @@
                             <h3>풍미통닭 <span class="tag">맛집</span></h3>
                             <p>압력밥솥 마늘통닭 (줄서서 먹음)</p>
                         </div>
+                    </div>
+                    <div class="item">
+                        <div class="num food">7</div>
+                        <div class="content">
+                            <h3>금빈회관 <span class="tag">한식</span></h3>
+                            <p>입안 가득 떡갈비 정식 유명한 곳</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="num">8</div>
+                        <div class="content">
+                            <h3>순천만 국가정원 <span class="tag">관광</span></h3>
+                            <p>순천의 랜드마크 (오천지구 입구)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="qr-box">
+                <div class="qr-text">더 상세한 정보 &<br>네비게이션 연동</div>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://github.com" class="qr-img" alt="QR코드">
+                <div class="qr-text">▲ 카메라 스캔</div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=8fc2009798229564e76abe6d35488ea6"></script>
+    
+    <script>
+        var container = document.getElementById('map');
+        var options = {
+            center: new kakao.maps.LatLng(34.937748, 127.504245), 
+            level: 7 
+        };
+
+        var map = new kakao.maps.Map(container, options);
+
+        // 좌표 데이터 (대략적인 위치)
+        var places = [
+            { title: '파티움하우스', lat: 34.937748, lng: 127.504245, type: 'main' },
+            { title: '1. 오몬떼', lat: 34.9355, lng: 127.5020, type: 'cafe' },
+            { title: '2. 오버랩', lat: 34.9365, lng: 127.5035, type: 'cafe' },
+            { title: '3. 브루웍스', lat: 34.9442, lng: 127.4988, type: 'cafe' },
+            { title: '4. 밀림슈퍼', lat: 34.9455, lng: 127.4980, type: 'cafe' },
+            { title: '5. 청춘창고', lat: 34.9440, lng: 127.4995, type: 'cafe' },
+            { title: '6. 풍미통닭', lat: 34.9475, lng: 127.4950, type: 'food' },
+            { title: '7. 금빈회관', lat: 34.9520, lng: 127.4850, type: 'food' },
+            { title: '8. 국가정원', lat: 34.9280, lng: 127.5100, type: 'tour' }
+        ];
+
+        // 지도가 모든 마커를 포함하도록 범위 설정
+        var bounds = new kakao.maps.LatLngBounds();
+
+        for (var i = 0; i < places.length; i++) {
+            var p = places[i];
+            var markerPosition = new kakao.maps.LatLng(p.lat, p.lng);
+            
+            // 마커 이미지 설정 (색상 구분)
+            var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png'; // 기본 별
+            var imageSize = new kakao.maps.Size(24, 35); 
+            
+            // 실제 구현시엔 기본 마커 사용하고 번호는 인포윈도우로 띄웁니다
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: markerPosition,
+                title: p.title
+            });
+
+            // 마커 위에 항상 이름 띄우기
+            var content = '<div style="padding:3px; font-size:11px; font-weight:bold; border-radius:4px; border:1px solid #333; background:white; white-space:nowrap;">' + p.title + '</div>';
+            var customOverlay = new kakao.maps.CustomOverlay({
+                position: markerPosition,
+                content: content,
+                yAnchor: 2.2 // 마커 머리 위로 올리기
+            });
+            customOverlay.setMap(map);
+
+            // 범위 재설정을 위해 좌표 추가
+            bounds.extend(markerPosition);
+        }
+
+        // 모든 마커가 보이게 지도 범위 재설정
+        map.setBounds(bounds);
+    </script>
+</body>
+</html>
