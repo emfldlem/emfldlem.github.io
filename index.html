@@ -14,141 +14,142 @@
         }
 
         .page {
-            width: 210mm; height: 297mm;
+            width: 210mm; height: 297mm; /* A4 사이즈 */
             background: white; padding: 15mm;
             display: flex; flex-direction: column;
         }
 
         header {
-            border-bottom: 4px solid #FEE500; /* 카카오 포인트 컬러 */
+            border-bottom: 4px solid #FEE500; /* 카카오 노란색 */
             padding-bottom: 15px; margin-bottom: 20px;
             display: flex; justify-content: space-between; align-items: end;
         }
-        header h1 { font-size: 28px; color: #1C1C1C; letter-spacing: -1px; }
-        header p { font-size: 14px; color: #666; text-align: right; }
+        header h1 { font-size: 26px; color: #1C1C1C; letter-spacing: -1px; }
+        header p { font-size: 13px; color: #666; text-align: right; }
 
-        /* 지도가 표시될 영역 */
+        /* 지도 영역 */
         #map {
-            flex: 1;
+            flex: 1.2; /* 지도를 좀 더 크게 */
             width: 100%;
             background-color: #f0f0f0;
             border: 2px solid #1C1C1C;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
-        .info-section { height: 250px; display: flex; gap: 20px; }
-        .list-box { flex: 2.5; display: flex; flex-direction: column; justify-content: space-between; }
+        /* 하단 2단 레이아웃 */
+        .info-section { 
+            height: 350px; /* 리스트가 늘어나서 높이 키움 */
+            display: flex; gap: 15px; 
+        }
+
+        /* 왼쪽 리스트 (스크롤 가능하게 변경) */
+        .list-box { 
+            flex: 2.5; 
+            display: flex; flex-direction: column; 
+            overflow-y: hidden; /* 인쇄용이라 스크롤 숨김 */
+        }
         
-        .item { display: flex; align-items: flex-start; padding: 10px; border-bottom: 1px solid #ddd; }
+        .list-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 2열로 배치 */
+            column-gap: 15px;
+            row-gap: 8px;
+        }
+
+        .item { 
+            display: flex; align-items: center; 
+            padding: 6px 0; border-bottom: 1px solid #eee; 
+        }
         .num {
             background: #1C1C1C; color: white;
-            width: 24px; height: 24px; border-radius: 50%;
-            text-align: center; line-height: 24px;
-            font-size: 14px; font-weight: bold; margin-right: 12px; flex-shrink: 0;
+            width: 20px; height: 20px; border-radius: 50%;
+            text-align: center; line-height: 20px;
+            font-size: 12px; font-weight: bold; margin-right: 8px; flex-shrink: 0;
         }
-        .num.main { background: #FEE500; color: #1C1C1C; } /* 파티움 강조 */
+        .num.main { background: #FEE500; color: #1C1C1C; } /* 파티움 */
+        .num.cafe { background: #ff7e5f; } /* 카페는 살구색 */
+        .num.food { background: #00b09b; } /* 맛집은 민트색 */
 
-        .content h3 { font-size: 16px; margin-bottom: 4px; color: #1C1C1C; }
-        .content p { font-size: 13px; color: #666; line-height: 1.4; }
-        .tag { font-size: 11px; color: #d9480f; font-weight: bold; margin-left: 5px; }
+        .content h3 { font-size: 14px; margin-bottom: 2px; color: #1C1C1C; }
+        .content p { font-size: 11px; color: #666; }
+        .tag { font-size: 10px; color: #d9480f; font-weight: bold; margin-left: 3px; }
 
         .qr-box {
-            flex: 1; border: 2px solid #1C1C1C;
+            flex: 0.8; 
+            border: 2px solid #1C1C1C;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            text-align: center; background: #f9f9f9;
+            text-align: center; background: #f9f9f9; height: 100%;
         }
-        .qr-img { width: 110px; height: 110px; background: #ddd; margin: 10px 0; }
+        .qr-img { width: 100px; height: 100px; background: #ddd; margin: 10px 0; }
         .qr-text { font-size: 12px; font-weight: bold; color: #333; }
+
+        @media print {
+            body { background: none; padding: 0; }
+            .page { margin: 0; width: 100%; height: 100%; }
+            #map { -webkit-print-color-adjust: exact; } /* 지도 배경색 강제 출력 */
+        }
     </style>
 </head>
 <body>
     <div class="page">
         <header>
             <div>
-                <h1>순천 파티움하우스<br><span style="color:#e6c300">뒷풀이 & 핫플</span> 가이드</h1>
+                <h1>순천 파티움하우스 <span style="color:#d9480f">뒷풀이 & 맛집</span> 지도</h1>
             </div>
-            <p>결혼식 후 어디 갈지 고민이신가요?<br>현지인이 추천하는 BEST 코스</p>
+            <p>결혼식 와주셔서 감사합니다.<br>그냥 가기 아쉬운 분들을 위한 추천 코스!</p>
         </header>
 
         <div id="map"></div>
 
         <div class="info-section">
             <div class="list-box">
-                <div class="item">
-                    <div class="num main">★</div>
-                    <div class="content">
-                        <h3>파티움하우스 (결혼식장)</h3>
-                        <p>전남 순천시 남승룡로 34</p>
+                <div class="list-grid">
+                    <div class="item" style="grid-column: span 2; border-bottom: 2px solid #333; padding-bottom:10px; margin-bottom:5px;">
+                        <div class="num main">★</div>
+                        <div class="content">
+                            <h3>파티움하우스 (현재 위치)</h3>
+                            <p>전남 순천시 남승룡로 34</p>
+                        </div>
                     </div>
-                </div>
-                <div class="item">
-                    <div class="num">1</div>
-                    <div class="content">
-                        <h3>오몬떼 (Omonte) <span class="tag">차로 3분</span></h3>
-                        <p>가장 가까운 대형 정원 카페. 주차가 매우 편리합니다.</p>
+
+                    <div class="item">
+                        <div class="num cafe">1</div>
+                        <div class="content">
+                            <h3>오몬떼 <span class="tag">3분</span></h3>
+                            <p>가장 가까운 대형 정원 카페</p>
+                        </div>
                     </div>
-                </div>
-                <div class="item">
-                    <div class="num">2</div>
-                    <div class="content">
-                        <h3>브루웍스 (Brewworks) <span class="tag">차로 10분</span></h3>
-                        <p>순천역 근처, 옛 창고를 개조한 힙한 카페.</p>
+                    <div class="item">
+                        <div class="num cafe">2</div>
+                        <div class="content">
+                            <h3>오버랩 (오천점) <span class="tag">2분</span></h3>
+                            <p>예식장 바로 앞 대형 베이커리</p>
+                        </div>
                     </div>
-                </div>
-                <div class="item">
-                    <div class="num">3</div>
-                    <div class="content">
-                        <h3>순천만 국가정원 <span class="tag">관광 추천</span></h3>
-                        <p>순천의 랜드마크. 오천지구 방면 주차장 이용 추천.</p>
+                    <div class="item">
+                        <div class="num cafe">3</div>
+                        <div class="content">
+                            <h3>브루웍스 <span class="tag">10분</span></h3>
+                            <p>순천 핫플 1대장! 창고형 카페</p>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="qr-box">
-                <div class="qr-text">더 많은 맛집/카페<br>스마트폰으로 보기</div>
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://example.com" class="qr-img" alt="QR코드">
-                <div class="qr-text">▲ 카메라 스캔</div>
-            </div>
-        </div>
-    </div>
-
-    
-    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=8fc2009798229564e76abe6d35488ea6"></script>
-    <script>
-        var container = document.getElementById('map');
-        var options = {
-            center: new kakao.maps.LatLng(34.937748, 127.504245), // 파티움 중심
-            level: 6 // 확대 레벨 (숫자가 작을수록 확대됨, 5~6 추천)
-        };
-
-        var map = new kakao.maps.Map(container, options);
-
-        // 마커를 표시할 위치와 제목 데이터
-        var positions = [
-            { title: '파티움하우스', latlng: new kakao.maps.LatLng(34.937748, 127.504245) },
-            { title: '오몬떼', latlng: new kakao.maps.LatLng(34.9355, 127.5020) },
-            { title: '브루웍스', latlng: new kakao.maps.LatLng(34.9442, 127.4988) },
-            { title: '순천만국가정원', latlng: new kakao.maps.LatLng(34.9280, 127.5100) }
-        ];
-
-        // 마커 생성
-        for (var i = 0; i < positions.length; i ++) {
-            var marker = new kakao.maps.Marker({
-                map: map, 
-                position: positions[i].latlng,
-                title: positions[i].title
-            });
-            
-            // 마커 위에 이름 띄우기 (인포윈도우)
-            var iwContent = '<div style="padding:5px; font-size:12px; font-weight:bold;">' + positions[i].title + '</div>';
-            
-            var infowindow = new kakao.maps.InfoWindow({
-                position : positions[i].latlng, 
-                content : iwContent 
-            });
-            
-            infowindow.open(map, marker);
-        }
-    </script>
-</body>
-</html>
+                    <div class="item">
+                        <div class="num cafe">4</div>
+                        <div class="content">
+                            <h3>밀림슈퍼 <span class="tag">10분</span></h3>
+                            <p>레트로 감성 뿜뿜 사진 맛집</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="num cafe">5</div>
+                        <div class="content">
+                            <h3>청춘창고 <span class="tag">10분</span></h3>
+                            <p>브루웍스 옆 복합문화공간</p>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="num food">6</div>
+                        <div class="content">
+                            <h3>풍미통닭 <span class="tag">맛집</span></h3>
+                            <p>압력밥솥 마늘통닭 (줄서서 먹음)</p>
+                        </div>
