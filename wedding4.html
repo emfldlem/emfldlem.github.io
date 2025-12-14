@@ -3,53 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S & H Wedding Guide</title>
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-    
-    <link rel="stylesheet" href="css/style_wedding.css">
-
-    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=bv903cidxx"></script>
+    <title>맛집/여행 카드 UI 데모</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 한글 폰트 적용 (Pretendard) */
+        @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+        body { font-family: "Pretendard", sans-serif; }
+    </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800">
 
-    <header id="header">
-        <div class="logo">S <span>&</span> H Wedding</div>
-        <div style="font-size: 0.8em; font-weight: 600;">순천 가이드</div>
+    <header class="sticky top-0 z-50 bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 py-4">
+            <h1 class="text-xl font-bold mb-4">내 주변 핫플레이스 🔥</h1>
+            <div class="flex space-x-2 overflow-x-auto pb-2 scrollbar-hide">
+                <button class="px-4 py-2 bg-black text-white rounded-full text-sm font-semibold whitespace-nowrap">전체</button>
+                <button class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-full text-sm font-semibold whitespace-nowrap">☕ 카페</button>
+                <button class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-full text-sm font-semibold whitespace-nowrap">🍝 맛집</button>
+                <button class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-full text-sm font-semibold whitespace-nowrap">📷 관광지</button>
+            </div>
+        </div>
     </header>
 
-    <div id="wrapper">
-        <section class="hero">
-            <span class="icon-symbol">❤</span>
-            <h1>순천, 맛과 멋을 담다</h1>
-            <p>
-                먼 길 와주신 하객 여러분 감사합니다.<br>
-                파티움하우스 주변과 순천의 찐 맛집을 소개합니다.
-            </p>
-        </section>
+    <main class="max-w-7xl mx-auto px-4 py-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
-        <section class="map-section">
-            <div id="map-container">
-                <div id="map"></div>
-            </div>
-            <div style="text-align:center; margin-top:1em; font-size:0.9em; color:#888;">
-                👆 지도의 핀을 클릭하거나 아래 리스트를 눌러보세요.
-            </div>
-        </section>
+            <div class="group cursor-pointer">
+                <div class="relative w-full h-64 overflow-hidden rounded-xl bg-gray-200">
+                    <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=800&auto=format&fit=crop" alt="카페 이미지" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    <button class="absolute top-3 right-3 text-white/80 hover:text-red-500 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="rgba(0,0,0,0.5)" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                    </button>
+                    <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md text-xs font-bold shadow-sm">
+                        ☕ 카페
+                    </div>
+                </div>
 
-        <div class="filters">
-            <button class="filter-btn active" onclick="filterData('all')">전체보기</button>
-            <button class="filter-btn" onclick="filterData('meal')">🍚 맛집</button>
-            <button class="filter-btn" onclick="filterData('cafe')">☕ 카페</button>
-            <button class="filter-btn" onclick="filterData('gift')">🎁 선물</button>
+                <div class="mt-3">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-lg font-bold leading-tight text-gray-900 group-hover:text-blue-600 transition-colors">오션뷰 라떼 하우스</h3>
+                        <div class="flex items-center text-sm">
+                            <span class="text-yellow-500 mr-1">★</span>
+                            <span class="font-medium">4.8</span>
+                            <span class="text-gray-400 ml-1">(120)</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-1">강원도 강릉시 · 📍 1.2km</p>
+                    <div class="flex flex-wrap gap-1 mt-2">
+                        <span class="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-md">#바다뷰</span>
+                        <span class="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-md">#데이트</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="group cursor-pointer">
+                <div class="relative w-full h-64 overflow-hidden rounded-xl bg-gray-200">
+                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=800&auto=format&fit=crop" alt="맛집 이미지" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    <button class="absolute top-3 right-3 text-white/80 hover:text-red-500 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="rgba(0,0,0,0.5)" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                             <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                    </button>
+                    <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md text-xs font-bold shadow-sm">
+                        🍝 맛집
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-lg font-bold leading-tight text-gray-900 group-hover:text-blue-600 transition-colors">서울 다이닝 룸</h3>
+                        <div class="flex items-center text-sm">
+                            <span class="text-yellow-500 mr-1">★</span>
+                            <span class="font-medium">4.5</span>
+                            <span class="text-gray-400 ml-1">(54)</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-1">서울시 강남구 · 📍 0.5km</p>
+                    <div class="flex flex-wrap gap-1 mt-2">
+                        <span class="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-md">#스테이크</span>
+                        <span class="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-md">#예약필수</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="group cursor-pointer">
+                <div class="relative w-full h-64 overflow-hidden rounded-xl bg-gray-200">
+                    <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=800&auto=format&fit=crop" alt="관광지 이미지" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    <button class="absolute top-3 right-3 text-white/80 hover:text-red-500 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="rgba(0,0,0,0.5)" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                             <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                    </button>
+                    <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md text-xs font-bold shadow-sm">
+                        📷 관광지
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-lg font-bold leading-tight text-gray-900 group-hover:text-blue-600 transition-colors">푸른 수목원</h3>
+                        <div class="flex items-center text-sm">
+                            <span class="text-yellow-500 mr-1">★</span>
+                            <span class="font-medium">4.9</span>
+                            <span class="text-gray-400 ml-1">(310)</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-1">경기도 과천시 · 📍 5.2km</p>
+                    <div class="flex flex-wrap gap-1 mt-2">
+                        <span class="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-md">#힐링</span>
+                        <span class="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-md">#산책로</span>
+                    </div>
+                </div>
+            </div>
+
+             <div class="group cursor-pointer">
+                <div class="relative w-full h-64 overflow-hidden rounded-xl bg-gray-200">
+                    <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=800&auto=format&fit=crop" alt="음식 이미지" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    <button class="absolute top-3 right-3 text-white/80 hover:text-red-500 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="rgba(0,0,0,0.5)" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                             <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                    </button>
+                    <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md text-xs font-bold shadow-sm">
+                        🍝 맛집
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-lg font-bold leading-tight text-gray-900 group-hover:text-blue-600 transition-colors">스파이시 커리</h3>
+                        <div class="flex items-center text-sm">
+                            <span class="text-yellow-500 mr-1">★</span>
+                            <span class="font-medium">4.2</span>
+                            <span class="text-gray-400 ml-1">(22)</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-1">서울시 마포구 · 📍 3.1km</p>
+                    <div class="flex flex-wrap gap-1 mt-2">
+                        <span class="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-md">#이색요리</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <div class="tiles" id="tiles-container"></div>
-    </div>
+        <div class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
+            <button class="flex items-center gap-2 bg-black text-white px-6 py-3 rounded-full shadow-lg hover:bg-gray-800 transition-transform hover:-translate-y-1">
+                <span>🗺️ 지도 보기</span>
+            </button>
+        </div>
 
-    <footer id="footer">
-        <p>행복하게 잘 살겠습니다.<br>2025.12.14 신랑 OOO & 신부 OOO</p>
-    </footer>
-
-    <script src="js/script_wedding.js"></script>
+    </main>
 </body>
 </html>
