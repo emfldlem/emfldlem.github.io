@@ -1,57 +1,4 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>결혼식 뒷풀이 가이드</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
-        @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap');
-        body { font-family: "Pretendard", sans-serif; }
-        .font-serif { font-family: "Gowun Batang", serif; }
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-    </style>
-</head>
-<body class="bg-[#FDFBF7] text-gray-800 pb-20">
-
-    <header class="relative h-80 overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover object-center scale-105" alt="웨딩 배경">
-        
-        <div class="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
-
-        <div class="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-6">
-            <p class="text-xs uppercase tracking-[0.3em] text-white/80 mb-5">Thank You For Coming</p>
-            <h1 class="text-3xl sm:text-4xl font-serif font-bold mb-4 drop-shadow-sm">철수 & 영희의<br>추천 맛집 리스트</h1>
-            <p class="text-sm sm:text-base text-white/90 max-w-md leading-relaxed font-light opacity-90">
-                귀한 발걸음 해주셔서 진심으로 감사합니다.<br>
-                식사 후 가볍게 들르실 수 있는 주변 곳들을 모았습니다.
-            </p>
-            <div class="mt-6 text-white/50">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mx-auto">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
-                </svg>
-            </div>
-        </div>
-    </header>
-    <nav class="sticky top-0 z-40 bg-[#FDFBF7]/95 backdrop-blur-sm py-4 border-b border-gray-200 mb-8 mt-[-20px] rounded-t-3xl shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
-        <div class="flex justify-center gap-2 px-4 overflow-x-auto scrollbar-hide">
-            <button onclick="filterCards('all', this)" class="filter-btn px-4 py-1.5 bg-gray-900 text-white rounded-full text-xs font-medium shadow-md whitespace-nowrap transition-all">전체보기</button>
-            <button onclick="filterCards('food', this)" class="filter-btn px-4 py-1.5 bg-white text-gray-600 border border-gray-300 rounded-full text-xs font-medium whitespace-nowrap transition-all">🍽️ 맛집</button>
-            <button onclick="filterCards('cafe', this)" class="filter-btn px-4 py-1.5 bg-white text-gray-600 border border-gray-300 rounded-full text-xs font-medium whitespace-nowrap transition-all">☕ 카페</button>
-            <button onclick="filterCards('pub', this)" class="filter-btn px-4 py-1.5 bg-white text-gray-600 border border-gray-300 rounded-full text-xs font-medium whitespace-nowrap transition-all">🍺 뒷풀이</button>
-        </div>
-    </nav>
-
-    <main class="max-w-3xl mx-auto px-4">
-        <div class="grid grid-cols-2 gap-3" id="card-container"></div>
-    </main>
-
-    <footer class="fixed bottom-0 w-full bg-white border-t border-gray-200 py-4 px-6 text-center z-50">
-        <p class="text-xs text-gray-400">행복하게 잘 살겠습니다!</p>
-    </footer>
-
-    <script>
+<script>
         // [1] 데이터 관리 영역
         const placeData = [
             {
@@ -62,7 +9,7 @@
                 distance: "👣 도보 5분",
                 tag: "🅿️ 주차가능",
                 comment: "신부가 청첩장 모임 때 가장 많이 갔던 곳! 트러플 뇨끼 강추합니다.",
-                mapUrl: "https://map.naver.com",
+                mapUrl: "https://map.naver.com", // ✅ 진짜 주소가 있으면 이동함
                 tel: "0212345678"
             },
             {
@@ -73,7 +20,7 @@
                 distance: "🚗 차로 3분",
                 tag: "👶 아기의자",
                 comment: "단체석 완전 많음! 커피 못 드시는 분들 생과일주스 드세요.",
-                mapUrl: "https://map.kakao.com",
+                mapUrl: "https://map.kakao.com", // ✅ 진짜 주소가 있으면 이동함
                 tel: "0298765432"
             },
             {
@@ -84,7 +31,7 @@
                 distance: "👣 도보 8분",
                 tag: "🍺 뒷풀이",
                 comment: "결혼식 끝나고 친구들끼리 맥주 한잔하기 딱 좋은 분위기!",
-                mapUrl: "#",
+                mapUrl: "", // ✨ 수정: '#' 대신 그냥 비워뒀습니다 (빈 값)
                 tel: "01000000000"
             },
             {
@@ -95,16 +42,26 @@
                 distance: "👣 도보 10분",
                 tag: "🔥 구워줌",
                 comment: "저기압일땐 고기앞으로! 여기 고기 다 구워줘서 편해요.",
-                mapUrl: "#",
+                mapUrl: "", // ✨ 수정: '#' 대신 그냥 비워뒀습니다
                 tel: "0255556666"
             }
         ];
 
-        // [2] 화면 그리기 기능
+        // [2] 화면 그리기 기능 (점프 방지 기능 추가됨)
         const container = document.getElementById('card-container');
+        
         function renderCards() {
             container.innerHTML = "";
             placeData.forEach(place => {
+                // 지도 주소가 비어있으면(빈칸이면) 클릭 시 알림창 띄우기
+                // 주소가 있으면 새 창으로 열기
+                let linkAction = "";
+                if (place.mapUrl === "" || place.mapUrl === "#") {
+                    linkAction = `href="javascript:void(0);" onclick="alert('지도 링크를 준비 중입니다!')"`;
+                } else {
+                    linkAction = `href="${place.mapUrl}" target="_blank"`;
+                }
+
                 const cardHTML = `
                     <div class="place-card bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 flex flex-col h-full" data-category="${place.category}">
                         <div class="relative h-36 bg-gray-200">
@@ -125,7 +82,9 @@
                                 </div>
                             </div>
                             <div class="flex gap-1 mt-auto">
-                                <a href="${place.mapUrl}" target="_blank" class="flex-1 bg-yellow-400 py-1.5 rounded-md text-[11px] font-bold text-gray-900 hover:bg-yellow-500 flex items-center justify-center">길찾기</a>
+                                <a ${linkAction} class="flex-1 bg-yellow-400 py-1.5 rounded-md text-[11px] font-bold text-gray-900 hover:bg-yellow-500 flex items-center justify-center cursor-pointer">
+                                    길찾기
+                                </a>
                                 <a href="tel:${place.tel}" class="w-7 h-7 bg-gray-100 rounded-md flex items-center justify-center text-gray-600">📞</a>
                             </div>
                         </div>
@@ -135,7 +94,7 @@
             });
         }
 
-        // [3] 필터링 기능
+        // [3] 필터링 기능 (그대로 유지)
         function filterCards(category, btnElement) {
             const cards = document.querySelectorAll('.place-card');
             cards.forEach(card => {
@@ -154,5 +113,3 @@
 
         renderCards();
     </script>
-</body>
-</html>
