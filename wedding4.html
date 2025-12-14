@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S & H Wedding Guide</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    
+    <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=bv903cidxx"></script>
+
+    <style>
+        /* --- HTML5 UP 'Phantom' Style Inspired CSS --- */
+        :root {
+            --primary: #FF8C42;       /* 포인트 컬러 (오렌지) */
+            --bg-color: #ffffff;      /* 배경색 */
+            --bg-accent: #f8f9fa;     /* 강조 배경색 */
+            --text-main: #585858;     /* 본문 텍스트 */
+            --text-bold: #2b2b2b;     /* 제목 텍스트 */
+            --border: #e1e1e1;        /* 테두리 색상 */
+        }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; transition: color 0.2s; }
+        ul { list-style: none; padding: 0; }
+
+        /* 1. Header */
+        #header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5em 2em;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid transparent;
+            z-index: 1000;
+            box-sizing: border-box;
+            transition: all 0.3s;
+        }
+        #header.scrolled {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-bottom: 1px solid var(--border);
+        }
+        .logo {
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--text-bold);
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
+        .logo span { color: var(--primary); }
+
+        /* 2. Main Wrapper */
+        #wrapper {
+            max-width: 1080px; /* Phantom 템플릿의 핵심 너비 */
+            margin: 0 auto;
+            padding: 6em 2em 4em 2em;
+        }
+
+        /* 3. Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 4em;
+            border-bottom: solid 1px var(--border);
+            padding-bottom: 4em;
+        }
+        .hero h1 {
+            font-size: 2.5em;
+            color: var(--text-bold);
+            margin-bottom: 0.5em;
+            letter-spacing: -1px;
+        }
+        .hero p {
+            font-size: 1.1em;
+            color: #888;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .icon-symbol {
+            display: inline-block;
+            width: 3em; height: 3em;
+            line-height: 3em;
+            border-radius: 100%;
+            border: solid 1px var(--border);
+            color: var(--primary);
+            margin-bottom: 1.5em;
+            font-size: 1.2em;
+        }
+
+        /* 4. Map Section */
+        .map-section {
+            margin-bottom: 4em;
+        }
+        #map-container {
+            width: 100%;
+            height: 400px;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 5px solid white;
+        }
+        #map { width: 100%; height: 100%; }
+
+        /* 5. Filter Buttons */
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 1em;
+            margin-bottom: 3em;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            padding: 0.6em 1.5em;
+            font-size: 0.8em;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-main);
+            border-radius: 4px;
+        }
+        .filter-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        .filter-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        /* 6. Tiles (Grid) - Phantom Template의 핵심 UI */
+        .tiles {
+            display: flex;
+            flex-wrap: wrap;
+            margin: -1.5em; /* gutter 보정 */
+        }
+        .tile {
+            width: calc(33.333% - 3em); /* 3열 */
+            margin: 1.5em;
+            background: var(--bg-color);
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        /* 타일 이미지 영역 */
+        .tile .image {
+            position: relative;
+            width: 100%;
+            padding-bottom: 75%; /* 4:3 비율 유지 */
+            overflow: hidden;
+            border-radius: 4px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            margin-bottom: 1.5em;
+        }
+        .tile .image img {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        .tile:hover .image img {
+            transform: scale(1.05); /* 줌인 효과 */
+        }
+
+        /* 타일 텍스트 영역 */
+        .tile h2 {
+            font-size: 1.1em;
+            margin: 0 0 0.5em 0;
+            color: var(--text-bold);
+            font-weight: 700;
+        }
+        .tile .content {
+            font-size: 0.9em;
+            color: var(--text-main);
+        }
+        .tag-row {
+            margin-top: 1em;
+            font-size: 0.75em;
+            font-weight: 600;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* 7. Footer */
+        #footer {
+            text-align: center;
+            padding: 4em 0;
+            margin-top: 4em;
+            border-top: solid 1px var(--border);
+            color: #aaa;
+            font-size: 0.8em;
+        }
+
+        /* Mobile Responsive */
+        @media screen and (max-width: 980px) {
+            .tile { width: calc(50% - 3em); } /* 태블릿 2열 */
+        }
+        @media screen and (max-width: 600px) {
+            #wrapper { padding: 4em 1.5em; }
+            .hero h1 { font-size: 1.8em; }
+            .tile { width: 100%; margin: 1.5em 0; } /* 모바일 1열 */
+            .filters { gap: 0.5em; }
+            .filter-btn { padding: 0.5em 1em; font-size: 0.75em; }
+            #map-container { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <div class="logo">
+            S <span>&</span> H Wedding
+        </div>
+        <div style="font-size: 0.8em; font-weight: 600;">순천 가이드</div>
+    </header>
+
+    <div id="wrapper">
+
+        <section class="hero">
+            <span class="icon-symbol">❤</span>
+            <h1>순천, 맛과 멋을 담다</h1>
+            <p>
+                먼 길 와주신 하객 여러분 감사합니다.<br>
+                파티움하우스 주변과 순천의 찐 맛집을 소개합니다.
+            </p>
+        </section>
+
+        <section class="map-section">
+            <div id="map-container">
+                <div id="map"></div>
+            </div>
+            <div style="text-align:center; margin-top:1em; font-size:0.9em; color:#888;">
+                👆 지도의 핀을 클릭하거나 아래 리스트를 눌러보세요.
+            </div>
+        </section>
+
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterData('all')">전체보기</button>
+            <button class="filter-btn" onclick="filterData('meal')">🍚 맛집</button>
+            <button class="filter-btn" onclick="filterData('cafe')">☕ 카페</button>
+            <button class="filter-btn" onclick="filterData('gift')">🎁 선물</button>
+        </div>
+
+        <div class="tiles" id="tiles-container">
+            </div>
+
+    </div>
+
+    <footer id="footer">
+        <p>
+            행복하게 잘 살겠습니다.<br>
+            2025.12.14 신랑 OOO & 신부 OOO
+        </p>
+    </footer>
+
+    <script>
+        // --- 1. 데이터 설정 (파티움하우스 좌표: 34.974319, 127.483918) ---
+        const places = [
+            {
+                id: 0,
+                name: "파티움하우스 순천",
+                category: "wedding",
+                lat: 34.974319, 
+                lng: 127.483918,
+                distance: "현재 위치",
+                desc: "오늘의 예식장입니다. 감사합니다!",
+                image: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=600&q=80"
+            },
+            {
+                id: 1,
+                name: "브루웍스",
+                category: "cafe",
+                lat: 34.944933,
+                lng: 127.505244,
+                distance: "차량 12분 (순천역 앞)",
+                desc: "창고형 대형 카페. 기차 타기 전 친구들과 수다떨기 좋은 곳.",
+                image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=80"
+            },
+            {
+                id: 2,
+                name: "금빈회관",
+                category: "meal",
+                lat: 34.956621,
+                lng: 127.487854,
+                distance: "차량 7분",
+                desc: "한정식 스타일의 돼지떡갈비. 반찬이 푸짐해 어른들이 좋아하세요.",
+                image: "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&q=80"
+            },
+            {
+                id: 3,
+                name: "조훈모과자점 팔마점",
+                category: "gift",
+                lat: 34.935012,
+                lng: 127.510034, 
+                distance: "차량 15분",
+                desc: "순천 3대 빵집. 빈손으로 가기 아쉬울 때 선물용 빵 사가세요.",
+                image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&q=80"
+            },
+            {
+                id: 4,
+                name: "건봉국밥",
+                category: "meal",
+                lat: 34.945511,
+                lng: 127.498022,
+                distance: "차량 10분",
+                desc: "아랫장 터줏대감. 해장이 필요하다면 무조건 여기입니다.",
+                image: "https://images.unsplash.com/photo-1572445271230-a78b5944a659?w=600&q=80"
+            },
+            {
+                id: 5,
+                name: "카페 앳더(At The)",
+                category: "cafe",
+                lat: 34.925123,
+                lng: 127.515234,
+                distance: "차량 20분",
+                desc: "순천만 가는 길 논밭뷰가 예술. 주차가 넓고 편해요.",
+                image: "https://images.unsplash.com/photo-1507133750069-41d57107aa1d?w=600&q=80"
+            }
+        ];
+
+        // --- 2. 카드 렌더링 (HTML5 UP Phantom Style) ---
+        const container = document.getElementById('tiles-container');
+
+        function renderTiles(data) {
+            container.innerHTML = '';
+            data.forEach(place => {
+                if(place.category === 'wedding') return; // 예식장은 카드에서 제외
+
+                let catLabel = place.category === 'meal' ? '맛집' : (place.category === 'cafe' ? '카페' : '선물');
+                
+                const html = `
+                    <article class="tile" onclick="moveToMap(${place.lat}, ${place.lng})">
+                        <div class="image">
+                            <img src="${place.image}" alt="${place.name}" />
+                        </div>
+                        <div class="tag-row">${place.distance} &bull; ${catLabel}</div>
+                        <h2>${place.name}</h2>
+                        <div class="content">
+                            <p>${place.desc}</p>
+                        </div>
+                    </article>
+                `;
+                container.innerHTML += html;
+            });
+        }
+
+        // --- 3. 필터 기능 ---
+        function filterData(cat) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if(cat === 'all') renderTiles(places);
+            else renderTiles(places.filter(p => p.category === cat));
+        }
+
+        // --- 4. 지도 로직 ---
+        let map = null;
+        
+        function initMap() {
+            var mapOptions = {
+                center: new naver.maps.LatLng(34.974319, 127.483918), // 파티움하우스
+                zoom: 13,
+                scrollWheel: false, // 스크롤 방지 (모바일 편의성)
+                scaleControl: false,
+                mapDataControl: false
+            };
+            map = new naver.maps.Map('map', mapOptions);
+
+            places.forEach(place => {
+                let isWedding = place.category === 'wedding';
+                let color = isWedding ? '#FF5555' : '#FF8C42';
+                
+                var marker = new naver.maps.Marker({
+                    position: new naver.maps.LatLng(place.lat, place.lng),
+                    map: map,
+                    title: place.name,
+                    icon: {
+                        content: `
+                            <div style="
+                                padding:8px 16px; background:${color}; color:white;
+                                border-radius:30px; font-size:13px; font-weight:700;
+                                box-shadow:0 3px 10px rgba(0,0,0,0.2); border:2px solid white;
+                                white-space:nowrap; transform:translateY(-10px);
+                            ">
+                                ${isWedding ? '💒 ' : ''}${place.name}
+                            </div>
+                        `,
+                        anchor: new naver.maps.Point(25, 25)
+                    }
+                });
+                
+                // 마커 클릭 시 이동
+                naver.maps.Event.addListener(marker, 'click', function() {
+                    map.panTo(marker.getPosition());
+                });
+            });
+        }
+
+        function moveToMap(lat, lng) {
+            if(map) {
+                map.morph(new naver.maps.LatLng(lat, lng), 15);
+                document.getElementById('header').scrollIntoView({ behavior: 'smooth' }); // 상단으로 조금 이동
+            }
+        }
+
+        // Header Scroll Effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if(window.scrollY > 50) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+        });
+
+        // 초기화
+        renderTiles(places);
+        window.onload = function() {
+            if(typeof naver !== 'undefined') initMap();
+        }
+
+    </script>
+</body>
+</html>
