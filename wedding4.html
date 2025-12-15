@@ -34,6 +34,7 @@
             <button onclick="filterCards('food', this)" class="filter-btn px-4 py-1.5 bg-white text-gray-600 border border-gray-300 rounded-full text-xs font-medium whitespace-nowrap transition-all">🍽️ 맛집</button>
             <button onclick="filterCards('cafe', this)" class="filter-btn px-4 py-1.5 bg-white text-gray-600 border border-gray-300 rounded-full text-xs font-medium whitespace-nowrap transition-all">☕ 카페</button>
             <button onclick="filterCards('pub', this)" class="filter-btn px-4 py-1.5 bg-white text-gray-600 border border-gray-300 rounded-full text-xs font-medium whitespace-nowrap transition-all">🍺 뒷풀이</button>
+            <button onclick="filterCards('yeosu', this)" class="filter-btn px-4 py-1.5 bg-white text-blue-600 border border-blue-200 rounded-full text-xs font-medium whitespace-nowrap transition-all">🌊 여수</button>
         </div>
     </nav>
 
@@ -48,10 +49,10 @@
 
     <script>
         // ============================================================
-        // [1] 데이터 영역
+        // [1] 데이터 영역 (순천 + 여수 통합)
         // ============================================================
         const placeData = [
-            // ---------------- [5분 거리] ----------------
+            // ================= [순천 지역] =================
             {
                 category: "food",
                 name: "건봉국밥",
@@ -59,7 +60,7 @@
                 image: "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20210701_167%2F1625112419372YWz13_PNG%2FSipeKn5VCPdocfFdy7gR7xsJ.png",
                 distance: "🚗 차로 5분",
                 tag: "🏆 전국구 맛집",
-                parking: true, // 주차 가능 여부
+                parking: true,
                 comment: "아랫장에 위치한 전설의 국밥집! 국물이 진하고 수육이 정말 부드러워요.",
                 mapUrl: "https://naver.me/5PSjKjR7",
                 tel: "0617520900"
@@ -100,8 +101,6 @@
                 mapUrl: "https://naver.me/GdymnFRh",
                 tel: "050713060157"
             },
-            
-            // ---------------- [7-10분 거리] ----------------
             {
                 category: "food",
                 name: "풍미통닭",
@@ -138,8 +137,6 @@
                 mapUrl: "https://naver.me/5GpYLaSP",
                 tel: "0617220000"
             },
-
-            // ---------------- [15분 거리] ----------------
             {
                 category: "food",
                 name: "대숲골농원",
@@ -212,8 +209,6 @@
                 mapUrl: "https://naver.me/xAFC1nlk", 
                 tel: "050713000000"
             },
-
-            // ---------------- [18-20분 거리] ----------------
             {
                 category: "food",
                 name: "밥꽃이야기 들마루",
@@ -261,21 +256,191 @@
                 comment: "젊은 하객분들께 추천! 분위기 좋은 곳에서 양식을 즐기고 싶다면 여기로.",
                 mapUrl: "https://naver.me/GEXhVncF", 
                 tel: "050713300000"
+            },
+
+            // ================= [🌊 여수 지역] =================
+            // (차로 30분~40분 소요 / category: 'yeosu')
+            {
+                category: "yeosu",
+                name: "낭만별식",
+                subTitle: "해물삼합·갓김치",
+                image: "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240501_158%2F1714536129313euiea_JPEG%2FKakaoTalk_20240501_123243085.jpg",
+                distance: "🚗 차로 30분",
+                tag: "🥩 해물삼합",
+                parking: true,
+                comment: "여수 밤바다 보며 즐기는 해물삼합! 여수 여행의 필수 코스입니다.",
+                mapUrl: "https://naver.me/FW6nrMeB",
+                tel: ""
+            },
+            {
+                category: "yeosu",
+                name: "청정게장촌",
+                subTitle: "갈치조림·게장",
+                image: "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230518_251%2F16843850804319T8zv_JPEG%2F%25BF%25A9%25BC%25F6%25C3%25BB%25C1%25A4%25B0%25D4%25C0%25E5%25C3%25CC_24.jpg",
+                distance: "🚗 차로 30분",
+                tag: "🦀 게장골목",
+                parking: true,
+                comment: "봉산동 게장골목의 터줏대감. 갈치조림과 게장의 조화가 일품입니다.",
+                mapUrl: "https://naver.me/GtUyzTjm",
+                tel: ""
+            },
+            {
+                category: "yeosu",
+                name: "바다김밥",
+                subTitle: "여수 명물 김밥",
+                image: "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTEwMTBfNDQg%2FMDAxNzYwMDYwODU0Nzg2.Xx0s0wvf4mBFLv5HYFed7zhYg8Jav7sMvo4vSCniBJMg.lyNmdFhhbXskNESknVVMqHNPMFaU2SLL92zNFyYmwKIg.JPEG%2FIMG_6757.jpg",
+                distance: "🚗 차로 35분",
+                tag: "🍙 웨이팅 필수",
+                parking: true,
+                comment: "갓참치김밥, 중화어묵김밥이 유명해요. 포장해서 바다 보며 드세요.",
+                mapUrl: "https://naver.me/FEUXsJ7m",
+                tel: ""
+            },
+            {
+                category: "yeosu",
+                name: "명동게장",
+                subTitle: "돌게장 백반",
+                image: "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250914_259%2F1757835530566J4SCj_JPEG%2FKakaoTalk_20250914_035226848.jpg",
+                distance: "🚗 차로 30분",
+                tag: "🦀 돌게장 리필",
+                parking: true,
+                comment: "돌게장 리필이 가능한 곳! 가성비 좋게 배터지게 드실 수 있습니다.",
+                mapUrl: "https://naver.me/5BcFJtwR",
+                tel: ""
+            },
+            {
+                category: "yeosu",
+                name: "정다운식당",
+                subTitle: "허영만의 백반기행",
+                image: "https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNTAyMDhfMTU4%2FMDAxNzM4OTQ5NTYyMjg0.w76gF0WcbmWBe8LR4pwTRpMeFcCoca3QeesrS2ZmxKwg.MTrxCqGPxd6P2LbsWBogvVacWkbn0ybeaAhaWk5yDAgg.JPEG%2FDSC_9497.JPG",
+                distance: "🚗 차로 35분",
+                tag: "🥘 허영만 맛집",
+                parking: true,
+                comment: "식객 허영만 화백이 다녀간 곳. 시원한 물곰탕과 꽃게탕이 유명해요.",
+                mapUrl: "https://naver.me/xKERjXSa",
+                tel: ""
+            },
+            {
+                category: "yeosu",
+                name: "꽃돌게장1번가",
+                subTitle: "프리미엄 게장",
+                image: "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20241014_74%2F1728905099006gDP30_JPEG%2F4M0B7761.JPG",
+                distance: "🚗 차로 30분",
+                tag: "💎 프리미엄 게장",
+                parking: true,
+                comment: "깔끔하고 고급스러운 분위기의 게장집. 부모님 모시고 가기 가장 좋습니다.",
+                mapUrl: "https://naver.me/5eUcAaf8",
+                tel: ""
+            },
+            {
+                category: "yeosu",
+                name: "이순신수제버거",
+                subTitle: "여수 수제버거",
+                image: "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221214_180%2F16710019593097EgRJ_JPEG%2FDSC03451.jpg",
+                distance: "🚗 차로 35분",
+                tag: "🍔 이순신광장",
+                parking: true,
+                comment: "이순신광장 줄 서서 먹는 버거! 가볍게 간식으로 드시기 좋아요.",
+                mapUrl: "https://naver.me/5VmX7v2W",
+                tel: ""
+            },
+            {
+                category: "yeosu",
+                name: "두꺼비게장",
+                subTitle: "원조 게장 맛집",
+                image: "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240717_141%2F17212223739175LYMT_JPEG%2F1721134329516.jpg",
+                distance: "🚗 차로 30분",
+                tag: "🦀 원조 게장",
+                parking: true,
+                comment: "황소식당과 함께 게장 골목의 양대 산맥. 짭조름한 밥도둑입니다.",
+                mapUrl: "https://naver.me/F6lTMfDM",
+                tel: ""
+            },
+            {
+                category: "yeosu",
+                name: "이순신해물삼합",
+                subTitle: "차돌 삼합",
+                image: "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230306_283%2F1678097467022uHmck_JPEG%2F97488C7B-16B4-4EEC-8487-58E865E20035.jpeg",
+                distance: "🚗 차로 30분",
+                tag: "🐙 원조 삼합",
+                parking: true,
+                comment: "낭만포차 거리 근처에서 제대로 된 삼합을 드시고 싶다면 추천!",
+                mapUrl: "https://naver.me/GEXh2B9m",
+                tel: ""
+            },
+            {
+                category: "yeosu",
+                name: "순이네밥상",
+                subTitle: "가정식 백반",
+                image: "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20211125_287%2F16378040731690s32l_JPEG%2FKakaoTalk_20211124_165102307_09.jpg",
+                distance: "🚗 차로 35분",
+                tag: "🍱 백반 맛집",
+                parking: true,
+                comment: "가성비 최고의 게장 백반집. 아침 식사나 점심으로 부담 없이 즐기세요.",
+                mapUrl: "https://naver.me/GNWktmkw",
+                tel: ""
+            },
+            {
+                category: "yeosu",
+                name: "풀뿌리흑두부",
+                subTitle: "수제 흑두부",
+                image: "https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNTEyMTRfMTEw%2FMDAxNzY1NzAxMzg1MzMz.k7NKWWhpG2ovGYZxScPcpYXQdkMVxz5i7DOA2__MP0Eg.TuvekXlOj3jT4Zt0aXpswa04LqCAyHm2X9CbUMM7OuYg.JPEG%2FF4990630-AD87-47FC-975F-7554D68A8245.jpeg%3Ftype%3Dw1500_60_sharpen",
+                distance: "🚗 차로 30분",
+                tag: "🥘 건강 밥상",
+                parking: true,
+                comment: "100% 국산 콩으로 만든 고소한 흑두부 보쌈이 일품입니다.",
+                mapUrl: "https://naver.me/F2ZpiQGa",
+                tel: ""
+            },
+            {
+                category: "yeosu",
+                name: "프롬나드",
+                subTitle: "식물원 카페",
+                image: "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231127_125%2F170106541974426WSA_JPEG%2F%25BF%25A9%25BC%25F6_%25C0%25CC%25BB%25DB%25C4%25AB%25C6%25E4.jpg",
+                distance: "🚗 차로 35분",
+                tag: "☕ 오션뷰 카페",
+                parking: true,
+                comment: "바다와 숲이 어우러진 대형 카페. 사진 찍기 정말 좋은 곳이에요.",
+                mapUrl: "https://naver.me/xIeMKYl7",
+                tel: ""
+            },
+            {
+                category: "yeosu",
+                name: "파란시베이커리",
+                subTitle: "오션뷰 베이커리",
+                image: "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20251205_252%2F1764900593377vYC3w_JPEG%2FKakaoTalk_20251203_135733961_05.jpg",
+                distance: "🚗 차로 35분",
+                tag: "🥐 베이커리",
+                parking: true,
+                comment: "여수 바다를 한눈에 담을 수 있는 뷰 맛집. 빵 종류도 다양해요.",
+                mapUrl: "https://naver.me/G9pRl9GZ",
+                tel: ""
+            },
+            {
+                category: "yeosu",
+                name: "모이핀 오션점",
+                subTitle: "초대형 오션뷰 카페",
+                image: "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240501_158%2F1714536129313euiea_JPEG%2FKakaoTalk_20240501_123243085.jpg",
+                distance: "🚗 차로 40분",
+                tag: "🏰 역대급 규모",
+                parking: true,
+                comment: "여수에서 가장 유명한 카페 중 하나. 압도적인 규모와 뷰를 자랑합니다.",
+                mapUrl: "https://naver.me/FW6nrMeB",
+                tel: ""
             }
         ];
 
         // ============================================================
-        // [2] 자동 정렬 기능 (시간 순서대로 재배치)
+        // [2] 자동 정렬 기능 (가까운 순서로)
         // ============================================================
-        // 숫자(분)만 쏙 뽑아서 비교하는 로직
         placeData.sort((a, b) => {
-            const timeA = parseInt(a.distance.replace(/[^0-9]/g, "")) || 0; // "15분" -> 15
+            const timeA = parseInt(a.distance.replace(/[^0-9]/g, "")) || 0;
             const timeB = parseInt(b.distance.replace(/[^0-9]/g, "")) || 0;
-            return timeA - timeB; // 작은 숫자가 위로
+            return timeA - timeB;
         });
 
         // ============================================================
-        // [3] 화면 그리기 기능 (주차 배지 추가됨)
+        // [3] 화면 그리기 기능 (주차 배지 포함)
         // ============================================================
         const container = document.getElementById('card-container');
         
@@ -289,7 +454,6 @@
                     linkAction = `href="${place.mapUrl}" target="_blank"`;
                 }
 
-                // 주차 배지 HTML 생성 (parking이 true일 때만)
                 const parkingBadge = place.parking 
                     ? `<span class="bg-gray-800/80 backdrop-blur-sm text-white px-1.5 py-0.5 rounded text-[10px] font-bold flex items-center">🅿️ 주차가능</span>` 
                     : "";
@@ -301,7 +465,8 @@
                             <div class="absolute bottom-2 left-2 flex flex-wrap gap-1">
                                 <span class="bg-black/70 backdrop-blur-sm text-white px-1.5 py-0.5 rounded text-[10px] font-bold">${place.distance}</span>
                                 <span class="bg-blue-600/80 backdrop-blur-sm text-white px-1.5 py-0.5 rounded text-[10px] font-bold">${place.tag}</span>
-                                ${parkingBadge} </div>
+                                ${parkingBadge}
+                            </div>
                         </div>
                         <div class="p-3 flex-1 flex flex-col justify-between">
                             <div>
@@ -340,8 +505,14 @@
             });
             const buttons = document.querySelectorAll('.filter-btn');
             buttons.forEach(btn => {
+                // 일반 버튼 스타일
                 btn.className = "filter-btn px-4 py-1.5 bg-white text-gray-600 border border-gray-300 rounded-full text-xs font-medium whitespace-nowrap cursor-pointer hover:bg-gray-50 transition-all";
+                // 여수 버튼만 파란색 글씨 유지
+                if(btn.innerText.includes("여수")) {
+                    btn.classList.add("text-blue-600", "border-blue-200");
+                }
             });
+            // 클릭된 버튼 스타일
             btnElement.className = "filter-btn px-4 py-1.5 bg-gray-900 text-white rounded-full text-xs font-medium shadow-md whitespace-nowrap cursor-pointer transition-all transform scale-105";
         }
 
