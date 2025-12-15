@@ -47,10 +47,34 @@
 
     <script>
         // ============================================================
-        // [1] 데이터 영역 (보내주신 사진으로 교체 완료!)
+        // [1] 순천 파티움하우스 하객용 맛집 데이터 (최종 통합본)
         // ============================================================
         const placeData = [
-            // ---------------- [맛집: 꼬막/한정식] ----------------
+            // ---------------- [맛집: 꼬막/한정식/닭구이] ----------------
+            {
+                category: "food",
+                name: "대숲골농원",
+                subTitle: "대나무숲 닭구이",
+                // 📸 (신규) 대나무 숲 분위기 이미지
+                image: "https://images.unsplash.com/photo-1445964047600-cdbdb87369a6?q=80&w=600&auto=format&fit=crop",
+                distance: "🚗 차로 15분",
+                tag: "🎋 뷰맛집",
+                comment: "대나무 숲속에서 닭구이를 먹을 수 있어요. 부모님도, 친구들도 모두 감탄하는 곳!",
+                mapUrl: "https://naver.me/FwnvVqWq",
+                tel: "0617411804"
+            },
+            {
+                category: "food",
+                name: "텃밭",
+                subTitle: "토종닭 숯불구이",
+                // 📸 (신규) 숯불구이 이미지
+                image: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?q=80&w=600&auto=format&fit=crop",
+                distance: "🚗 차로 15분",
+                tag: "🔥 현지인 찐맛집",
+                comment: "순천 현지인들이 줄 서서 먹는 닭구이 집입니다. 매콤한 양념구이가 별미예요.",
+                mapUrl: "https://naver.me/xNlO9t0s",
+                tel: "0617253692"
+            },
             {
                 category: "food",
                 name: "도원경",
@@ -95,8 +119,6 @@
                 mapUrl: "https://naver.me/xYQmqmXq",
                 tel: "0617260536"
             },
-
-            // ---------------- [맛집: 국밥/통닭/기타] ----------------
             {
                 category: "food",
                 name: "건봉국밥",
@@ -132,17 +154,6 @@
             },
             {
                 category: "food",
-                name: "다락카레",
-                subTitle: "일본식 카레",
-                image: "https://images.unsplash.com/photo-1574484284002-952d92456975?q=80&w=600&auto=format&fit=crop", 
-                distance: "🚗 차로 15분",
-                tag: "🍛 호수공원 근처",
-                comment: "조례 호수공원 산책하고 가기 좋아요. 카레가 부드럽고 토핑이 다양합니다.",
-                mapUrl: "https://naver.me/5SWqSjRj", 
-                tel: "0617250221"
-            },
-            {
-                category: "food",
                 name: "힉 (Hic)",
                 subTitle: "화덕피자 & 파스타",
                 image: "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240528_182%2F1716907005140TPW5g_PNG%2F%25B3%25D7%25C0%25CC%25B9%25F6%25BB%25E7%25C1%25F8%25A4%25BB.png",
@@ -153,7 +164,55 @@
                 tel: "050713300000"
             },
 
-            // ---------------- [카페: 베이커리/디저트] ----------------
+            // ---------------- [카페: 베이커리/감성카페] ----------------
+            {
+                category: "cafe",
+                name: "베비에르 르꼬뮤네",
+                subTitle: "초대형 베이커리",
+                // 📸 (신규) 빵 가득한 이미지
+                image: "https://images.unsplash.com/photo-1555507036-ab1f40388085?q=80&w=600&auto=format&fit=crop",
+                distance: "🚗 차로 15분",
+                tag: "🥐 빵지순례",
+                comment: "순천에서 가장 큰 빵집 중 하나! 마왕파이가 유명하고 선물용 사가기도 좋아요.",
+                mapUrl: "https://naver.me/FpMPXqJp",
+                tel: "0617220696"
+            },
+            {
+                category: "cafe",
+                name: "브루웍스",
+                subTitle: "창고형 카페",
+                // 📸 (신규) 빈티지 공장형 카페 이미지
+                image: "https://images.unsplash.com/photo-1442512595367-4273250983a6?q=80&w=600&auto=format&fit=crop",
+                distance: "🚗 차로 5분",
+                tag: "🏭 분위기 깡패",
+                comment: "오래된 창고를 개조해서 만든 힙한 카페. 카카오 라떼가 정말 진하고 맛있어요.",
+                mapUrl: "https://naver.me/5YG1K2xL",
+                tel: "0617452545"
+            },
+            {
+                category: "cafe",
+                name: "밀림슈퍼",
+                subTitle: "레트로 감성 카페",
+                // 📸 (신규) 레트로한 느낌 이미지
+                image: "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=600&auto=format&fit=crop",
+                distance: "🚗 차로 5분",
+                tag: "🎞️ 사진 맛집",
+                comment: "옛날 슈퍼를 그대로 살린 뉴트로 감성! 밀크티랑 바게트가 유명해요.",
+                mapUrl: "https://naver.me/GhE8rL8d",
+                tel: "050713060157"
+            },
+            {
+                category: "cafe",
+                name: "조훈모과자점 팔마점",
+                subTitle: "순천 명장 빵집",
+                // 📸 (신규) 제과점 이미지
+                image: "https://images.unsplash.com/photo-1612203985729-70726954388c?q=80&w=600&auto=format&fit=crop",
+                distance: "🚗 차로 15분",
+                tag: "🥖 배빵 유명함",
+                comment: "순천 현지인이 인정하는 빵집. 2층 카페 공간도 넓어서 쉬어가기 좋습니다.",
+                mapUrl: "https://naver.me/5vI8mR5j",
+                tel: "050713583822"
+            },
             {
                 category: "cafe",
                 name: "우즈베이커리",
@@ -249,7 +308,6 @@
 
         // 실행
         renderCards();
-
     </script>
 </body>
 </html>
